@@ -1,0 +1,21 @@
+.containerContent {
+    background-color: #fbf3f1;
+}
+
+.pDescripcion {
+    text-align: justify;
+}
+
+.logo {
+    width: 200px;
+    height: 150px;
+    border: solid 1px transparent;
+    border-radius: 15px;
+}
+
+.banner{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+} 
