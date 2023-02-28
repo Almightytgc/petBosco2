@@ -1,9 +1,21 @@
 <?php include("../../conexionBd.php"); 
 
-/*codigo para hacer la consulta a la base de datos*/
-$sentencia = $conexion->prepare("SELECT * FROM reportemedico");
-$sentencia->execute();
-$lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+if (isset($_GET['txtID'])) {
+
+  $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
+
+  /*codigo para hacer la consulta a la base de datos*/
+  $sentencia = $conexion->prepare("SELECT * FROM reportemedico WHERE id_reporte=:id_reporte");
+  $sentencia->bindParam(":id_reporte",$txtID);
+  $sentencia->execute();
+  $registro = $sentencia->fetch(PDO::FETCH_LAZY);
+  $chequeoGeneral = $registro['chequeogeneral'];
+  $medicamento = $registro['medicamento'];
+  $tratamiento = $registro['tratamiento'];
+  $fechareporte = $registro['fechareporte'];
+}
+
+
 
 //actualizar
 if($_POST) {
@@ -22,6 +34,7 @@ if($_POST) {
   $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fecha=:fechareporte WHERE id_reporte=:id_reporte");
   
   //asigando los valores que vienen del método post (que vienen del formulario)
+  $sentencia->bindParam(":id_reporte",$txtID);
   $sentencia->bindParam(":chequeogeneral",$chequeoGeneral);
   $sentencia->bindParam(":medicamento",$medicamento);
   $sentencia->bindParam(":tratamiento",$tratamiento);
@@ -82,7 +95,7 @@ if($_POST) {
               value = "<?php echo $fechareporte?>"
                 class="form-control" name="fechareporte" id="fechareporte" aria-describedby="helpId" placeholder="Nombre del puesto">
             </div>
-            <button type="submit" class="btn btn-success">Agregar</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
             <a name="" id="" class="btn btn-danger" href="index.php" role="button">Cancelar</a>                    
         </form>
     </div>

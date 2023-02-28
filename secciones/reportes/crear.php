@@ -12,7 +12,7 @@ if($_POST) {
 
 
     /*preparamos la insercción o sentencia sql */
-    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporte, chequeogeneral, medicamento, tratamiento, fecha) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha)");
+    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporte, chequeoGeneral, medicamento, tratamiento, fechaReporte) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha)");
 
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":chequeogeneral",$chequeoGeneral);
@@ -27,6 +27,8 @@ if($_POST) {
 ?>
 
 <?php include("../../templates/header.php");?>
+
+
 
 <img src="../../logos/logo.png" alt="logo">
 

@@ -5,6 +5,19 @@ $sentencia = $conexion->prepare("SELECT * FROM reportemedico");
 $sentencia->execute();
 $lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+//codigo para borrar datos
+if (isset($_GET['txtID'])) {
+
+    $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
+    $sentencia = $conexion->prepare("DELETE FROM reportemedico WHERE id_reporte=:id_reporte");
+    $sentencia->bindParam(":id_reporte", $txtID);
+    $sentencia->execute();
+    header("location: index.php");
+
+}
+
+
+
 ?>
 
 <?php include("../../templates/header.php"); ?>
@@ -42,9 +55,9 @@ $lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <!--lo que va entre corchetes es la llave primaria de la tabla-->
                 <td scope="row"><?php echo $registro['id_reporte'];?></td>
                 <td scope="row"><?php echo $registro['chequeogeneral'];?></td>
+                <td scope="row"><?php echo $registro['medicamento'];?></td>
                 <td scope="row"><?php echo $registro['tratamiento'];?></td>
-                <td scope="row"><?php echo $registro['fecha'];?></td>
-                <td>27-02-23</td>
+                <td scope="row"><?php echo $registro['fechareporte'];?></td>
                 <td>
                     <!--boton para editar datos-->
                     <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_reporte']; ?>" role="button">Actualizar</a>
