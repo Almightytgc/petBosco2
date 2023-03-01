@@ -1,25 +1,40 @@
 <?php include("../../conexionBd.php"); 
 
+/*codigo para hacer la consulta a la base de datos*/
+$sentencia = $conexion->prepare("SELECT * FROM cliente");
+$sentencia->execute();
+$lista_clientes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+/*codigo para hacer la consulta a la base de datos*/
+$sentencia = $conexion->prepare("SELECT * FROM mascota");
+$sentencia->execute();
+$lista_mascotas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 /*si se reciben datos por el metodo post*/ 
 if($_POST) {
 
     /*recolectamos los datos */
     /*validamos si existe un dato para los input, de lo contrario va a quedar en blanco */
     $chequeoGeneral = (isset($_POST['chequeogeneral']) ? $_POST["chequeogeneral"]:"");
+    $chequeoGeneral = (isset($_POST['chequeogeneral']) ? $_POST["chequeogeneral"]:"");
     $medicamento = (isset($_POST['medicamento']) ? $_POST["medicamento"]:"");
     $tratamiento = (isset($_POST['tratamiento']) ? $_POST["tratamiento"]:"");
     $fechaReporte = (isset($_POST['fecha']) ? $_POST["fecha"]:"");
+    $cliente = (isset($_POST['idcliente']) ? $_POST["idcliente"]:"");
+    $mascota = (isset($_POST['idmascota']) ? $_POST["idmascota"]:"");
+
 
 
     /*preparamos la insercción o sentencia sql */
-    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporte, chequeoGeneral, medicamento, tratamiento, fechaReporte) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha)");
+    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporte, chequeoGeneral, medicamento, tratamiento, fechaReporte, fk_cliente, fk_mascota) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha, :idcliente, :idmascota)");
 
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":chequeogeneral",$chequeoGeneral);
     $sentencia->bindParam(":medicamento",$medicamento);
     $sentencia->bindParam(":tratamiento",$tratamiento);
     $sentencia->bindParam(":fecha",$fechaReporte);
-
+    $sentencia->bindParam(":idcliente",$cliente);
+    $sentencia->bindParam(":idmascota",$mascota);
     $sentencia->execute();
 
     header("Location: index.php");
@@ -63,6 +78,24 @@ if($_POST) {
               <input type="date"
               min="2023-01-01" max="2023-12-31" class="form-control" name="fecha" id="fecha" aria-describedby="helpId" placeholder="Fecha en que se realiza el reporte">
             </div>
+
+            <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="idcliente">
+              <option selected disabled>Seleccione el ID del dueño</option>
+              <?php foreach($lista_clientes as $registro) {?>            
+                <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
+                <!--lo que va entre corchetes es la llave primaria de la tabla-->
+                <option value=""><?php echo $registro['id_cliente'].": ".$registro['nombre']." ".$registro['apellido'];?></option>
+              <?php }?>
+            </select>
+
+            <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" class="idmascota">
+              <option selected disabled>Seleccione el ID de la mascota</option>
+              <?php foreach($lista_mascotas as $registro) {?>            
+                <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
+                <!--lo que va entre corchetes es la llave primaria de la tabla-->
+                <option value=""><?php echo $registro['id_mascota'].": ".$registro['Apodo_mascota'];?></option>
+              <?php }?>
+            </select>
 
 
             <button type="submit" class="btn btn-success">Guardar</button>

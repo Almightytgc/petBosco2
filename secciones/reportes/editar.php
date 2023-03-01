@@ -31,7 +31,7 @@ if($_POST) {
   
   
   /* preparamos la insercción o sentencia sql */
-  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fecha=:fechareporte WHERE id_reporte=:id_reporte");
+  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fechareporte=:fechareporte WHERE id_reporte=:id_reporte");
   
   //asigando los valores que vienen del método post (que vienen del formulario)
   $sentencia->bindParam(":id_reporte",$txtID);

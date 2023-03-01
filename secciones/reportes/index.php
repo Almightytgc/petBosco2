@@ -13,10 +13,7 @@ if (isset($_GET['txtID'])) {
     $sentencia->bindParam(":id_reporte", $txtID);
     $sentencia->execute();
     header("location: index.php");
-
 }
-
-
 
 ?>
 
