@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-03-2023 a las 22:00:09
+-- Tiempo de generación: 02-03-2023 a las 23:09:22
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -67,28 +67,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `fechaNac`, `num_telefonico`, `direccion`, `DUI`, `contraseña`) VALUES
-(1, 'ale', 'jimenez', '2023-02-14', '22866916', 'mi casa', '12345678900', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clinicavet`
---
-
-CREATE TABLE `clinicavet` (
-  `id_clinicaVet` int(11) NOT NULL,
-  `nombreVeterinaria` varchar(11) NOT NULL,
-  `numTelefonico` varchar(11) NOT NULL,
-  `direccion` varchar(200) NOT NULL,
-  `ContraseñaAdmin` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Volcado de datos para la tabla `clinicavet`
---
-
-INSERT INTO `clinicavet` (`id_clinicaVet`, `nombreVeterinaria`, `numTelefonico`, `direccion`, `ContraseñaAdmin`) VALUES
-(1, 'PetBosco', '1234245', 'una casa y giro', '');
+(3, 'jun', 'lopez', '2023-03-01', '123', 'su casa', '123', '12');
 
 -- --------------------------------------------------------
 
@@ -105,8 +84,16 @@ CREATE TABLE `mascota` (
   `condicionMascota` varchar(200) NOT NULL,
   `Peso` varchar(200) NOT NULL,
   `FechaNac` date NOT NULL,
-  `especie` varchar(111) NOT NULL
+  `especie` varchar(111) NOT NULL,
+  `fk_cliente` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `mascota`
+--
+
+INSERT INTO `mascota` (`id_mascota`, `Apodo_mascota`, `raza`, `color`, `Altura`, `condicionMascota`, `Peso`, `FechaNac`, `especie`, `fk_cliente`) VALUES
+(3, 'popi', 'doberman', 'rojo', '120', 'es bien feo ', '20 libras', '2023-03-01', 'canina ', 3);
 
 -- --------------------------------------------------------
 
@@ -131,8 +118,17 @@ CREATE TABLE `reportemedico` (
   `Tratamiento` varchar(200) NOT NULL,
   `Medicamento` varchar(200) NOT NULL,
   `ChequeoGeneral` varchar(200) NOT NULL,
-  `fechaReporte` date NOT NULL
+  `fechaReporte` date NOT NULL,
+  `fk_cliente` int(10) NOT NULL,
+  `fk_mascota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `reportemedico`
+--
+
+INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `ChequeoGeneral`, `fechaReporte`, `fk_cliente`, `fk_mascota`) VALUES
+(12, 'gregre', 'grgerg', 'fsdfsgf', '2023-03-23', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -167,16 +163,11 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id_cliente`);
 
 --
--- Indices de la tabla `clinicavet`
---
-ALTER TABLE `clinicavet`
-  ADD PRIMARY KEY (`id_clinicaVet`);
-
---
 -- Indices de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  ADD PRIMARY KEY (`id_mascota`);
+  ADD PRIMARY KEY (`id_mascota`),
+  ADD KEY `fk_cliente` (`fk_cliente`);
 
 --
 -- Indices de la tabla `pago`
@@ -188,7 +179,9 @@ ALTER TABLE `pago`
 -- Indices de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  ADD PRIMARY KEY (`id_reporteMedico`);
+  ADD PRIMARY KEY (`id_reporteMedico`),
+  ADD KEY `fk_cliente` (`fk_cliente`),
+  ADD KEY `fk_mascota` (`fk_mascota`);
 
 --
 -- Indices de la tabla `veterinario`
@@ -210,19 +203,13 @@ ALTER TABLE `citacliente`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `clinicavet`
---
-ALTER TABLE `clinicavet`
-  MODIFY `id_clinicaVet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
@@ -234,13 +221,30 @@ ALTER TABLE `pago`
 -- AUTO_INCREMENT de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinario`
 --
 ALTER TABLE `veterinario`
   MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `mascota`
+--
+ALTER TABLE `mascota`
+  ADD CONSTRAINT `mascota_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `reportemedico`
+--
+ALTER TABLE `reportemedico`
+  ADD CONSTRAINT `reportemedico_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reportemedico_ibfk_2` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
