@@ -5,7 +5,7 @@ if (isset($_GET['txtID'])) {
   $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
 
   /*codigo para hacer la consulta a la base de datos*/
-  $sentencia = $conexion->prepare("SELECT * FROM reportemedico WHERE id_reporte=:id_reporte");
+  $sentencia = $conexion->prepare("SELECT * FROM reportemedico WHERE id_reporteMedico=:id_reporte");
   $sentencia->bindParam(":id_reporte",$txtID);
   $sentencia->execute();
   $registro = $sentencia->fetch(PDO::FETCH_LAZY);
@@ -21,7 +21,7 @@ if (isset($_GET['txtID'])) {
 if($_POST) {
 
   /* recolectamos los datos */
-  $txtID = (isset($_POST['txtID']))?$_POST['txtID']:"";
+  $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
   /* validamos si existe un dato para nombredelpuesto, de lo contrario va a quedar en blanco */
   $chequeoGeneral = (isset($_POST['chequeogeneral']))?$_POST["chequeogeneral"]:"";
   $medicamento = (isset($_POST['medicamento']))?$_POST["medicamento"]:"";
@@ -31,10 +31,10 @@ if($_POST) {
   
   
   /* preparamos la insercción o sentencia sql */
-  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fechareporte=:fechareporte WHERE id_reporte=:id_reporte");
+  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fechareporte=:fechareporte WHERE id_reporteMedico=:id_reporteMedico");
   
   //asigando los valores que vienen del método post (que vienen del formulario)
-  $sentencia->bindParam(":id_reporte",$txtID);
+  $sentencia->bindParam(":id_reporteMedico",$txtID);
   $sentencia->bindParam(":chequeogeneral",$chequeoGeneral);
   $sentencia->bindParam(":medicamento",$medicamento);
   $sentencia->bindParam(":tratamiento",$tratamiento);

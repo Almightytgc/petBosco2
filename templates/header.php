@@ -37,7 +37,7 @@ body {
   display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background-image: url(../../../assets/svg/waves.svg);
+    background: url(/petbosco2/assets/svg/waves.svg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -71,7 +71,7 @@ body {
 <body>
 
   <!--inicio de nav-->
-  <header class="p-3 encabezado">
+  <header class="p-3 encabezado mb-5">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">

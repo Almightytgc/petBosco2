@@ -7,9 +7,8 @@ $lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 //codigo para borrar datos
 if (isset($_GET['txtID'])) {
-
     $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
-    $sentencia = $conexion->prepare("DELETE FROM reportemedico WHERE id_reporte=:id_reporte");
+    $sentencia = $conexion->prepare("DELETE FROM reportemedico WHERE id_reporteMedico=:id_reporte");
     $sentencia->bindParam(":id_reporte", $txtID);
     $sentencia->execute();
     header("location: index.php");
@@ -39,6 +38,8 @@ if (isset($_GET['txtID'])) {
                 <th scope="col">Medicamento</th>               
                 <th scope="col">Tratamiento</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">ID del dueño</th>
+                <th scope="col">ID de la mascota</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -46,22 +47,25 @@ if (isset($_GET['txtID'])) {
     
 
         <!--aquí usamos el foreach para poder imprimir ciclicamente todos los datos que se encuentren en la consulta-->
-        <?php foreach($lista_reportes as $registro) {?>            
-            <tr class="">
+        <?php foreach($lista_reportes as $registro){?>            
+            <tr>
                 <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                 <!--lo que va entre corchetes es la llave primaria de la tabla-->
-                <td scope="row"><?php echo $registro['id_reporte'];?></td>
-                <td scope="row"><?php echo $registro['chequeogeneral'];?></td>
-                <td scope="row"><?php echo $registro['medicamento'];?></td>
-                <td scope="row"><?php echo $registro['tratamiento'];?></td>
-                <td scope="row"><?php echo $registro['fechareporte'];?></td>
+                <td scope="row"><?php echo $registro['id_reporteMedico'];?></td>
+                <td scope="row"><?php echo $registro['ChequeoGeneral'];?></td>
+                <td scope="row"><?php echo $registro['Medicamento'];?></td>
+                <td scope="row"><?php echo $registro['Tratamiento'];?></td>
+                <td scope="row"><?php echo $registro['fechaReporte'];?></td>
+                <td scope="row"><?php echo $registro['fk_cliente'];?></td>
+                <td scope="row"><?php echo $registro['fk_mascota'];?></td>
+
                 <td>
                     <!--boton para editar datos-->
-                    <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_reporte']; ?>" role="button">Actualizar</a>
+                    <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_reporteMedico']; ?>" role="button">Actualizar</a>
                     <!--boton para borrar datos-->
 
                     <!--con el ? que está después del .php estamos pidiendo que atrape un parametro, que sería txtID, el contenido de txtID es igual al id que seleccionamos-->
-                    <a name="" id="" class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id_reporte']; ?>" role="button">Eliminar</a>
+                    <a name="" id="" class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id_reporteMedico']; ?>" role="button">Eliminar</a>
                 </td>
             </tr>
         <?php }?>
