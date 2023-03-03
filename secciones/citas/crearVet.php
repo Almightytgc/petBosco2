@@ -1,4 +1,4 @@
-<?php include("../../../conexionBd.php");
+<?php include("../../conexionBd.php");
 
 /*si se reciben datos por el metodo post*/
 if ($_POST) {
@@ -15,12 +15,14 @@ if ($_POST) {
 
 
   /*preparamos la insercción o sentencia sql */
-  $sentencia = $conexion->prepare("INSERT INTO citaveterinario(id_cita, motivo, fecha, hora) VALUES (null, :motivo, :fecha, :hora, )");
+  $sentencia = $conexion->prepare("INSERT INTO cita(id_cita, motivo, fecha, hora) VALUES (null, :motivo, :fecha, :hora, :fk_veterinario, :fk_mascota)");
 
   //asigando los valores que vienen del método post (que vienen del formulario)
   $sentencia->bindParam(":motivo", $motivo);
   $sentencia->bindParam(":fecha", $fecha);
   $sentencia->bindParam(":hora", $hora);
+  $sentencia->bindParam(":fk_veterinario", $fk_veterinario);
+  $sentencia->bindParam(":fk_mascota", $fk_mascota);
 
   $sentencia->execute();
 
@@ -28,13 +30,13 @@ if ($_POST) {
 }
 ?>
 
-<?php include("../../../templates/header.php"); ?>
+<?php include("../../templates/header.php"); ?>
 
-<img src="../../../logos/logo.png" alt="logo">
+<img src="../../logos/logo.png" alt="logo">
 
 <div class="card m-auto text-center">
   <div class="card-header">
-    <h14><b>Crear cita Veterinario</b></h4>
+    <h5><b>Crear una cita</b></h5>
   </div>
   <div class="card-body">
     <form action="" method="post" enctype="multipart/form-data">
@@ -58,18 +60,12 @@ if ($_POST) {
       <div class="mb-3">
       <label for="" class="form-label">mascota</label>
         <select class="form-select" aria-label="veterinario">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
         </select>
       </div>
 
       <div class="mb-3">
       <label for="" class="form-label">veterinario</label>
         <select class="form-select" aria-label="veterinario">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
         </select>
       </div>
  
@@ -82,4 +78,4 @@ if ($_POST) {
   </div>
 
 </div>
-<?php include("../../../templates/footer.php"); ?>
+<?php include("../../templates/footer.php"); ?>

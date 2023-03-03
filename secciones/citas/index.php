@@ -1,13 +1,13 @@
-<?php include("../../../conexionBd.php");?>
-<?php include("../../../templates/header.php");?>
+<?php include("../../conexionBd.php");?>
+<?php include("../../templates/header.php");?>
 
 <div class="container d-flex justify-content-center">
-    <h1><b>Agendar cita Veterinario</b></h1>
+    <h1>Citas médicas</h1>
 </div>
 
 <div class="card m-auto">
     <div class="card-header d-flex justify-content-center">
-        <a name="" id="" class="btn btn-primary" href="crearVet.php" role="button">Agendar Cita</a>
+        <a name="" id="" class="btn btn-primary" href="crearVet.php" role="button">agendar Cita</a>
     </div>
     <div class="card-body">
 
@@ -34,4 +34,4 @@
 
 </div>
 
-<?php include("../../../templates/footer.php"); ?>
+<?php include("../../templates/footer.php"); ?>
