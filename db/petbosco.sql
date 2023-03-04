@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2023 a las 18:01:03
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Servidor: localhost:3306
+-- Tiempo de generación: 04-03-2023 a las 18:15:07
+-- Versión del servidor: 8.0.30
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cita` (
-  `id_cita` int(11) NOT NULL,
+  `id_cita` int NOT NULL,
   `fecha` date NOT NULL,
   `motivo` varchar(200) NOT NULL,
-  `fk_cliente` int(11) NOT NULL,
-  `fk_veterinario` int(11) NOT NULL,
-  `fk_mascota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fk_cliente` int NOT NULL,
+  `fk_veterinario` int NOT NULL,
+  `fk_mascota` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE `cita` (
 --
 
 CREATE TABLE `cliente` (
-  `id_cliente` int(11) NOT NULL,
+  `id_cliente` int NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `fechaNac` date NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `cliente` (
   `direccion` varchar(200) NOT NULL,
   `DUI` varchar(11) NOT NULL,
   `contraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -67,7 +67,7 @@ INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `fechaNac`, `num_tele
 --
 
 CREATE TABLE `mascota` (
-  `id_mascota` int(11) NOT NULL,
+  `id_mascota` int NOT NULL,
   `Apodo_mascota` varchar(200) NOT NULL,
   `raza` varchar(200) NOT NULL,
   `color` varchar(200) NOT NULL,
@@ -76,8 +76,8 @@ CREATE TABLE `mascota` (
   `Peso` varchar(200) NOT NULL,
   `FechaNac` date NOT NULL,
   `especie` varchar(111) NOT NULL,
-  `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fk_cliente` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `mascota`
@@ -93,11 +93,11 @@ INSERT INTO `mascota` (`id_mascota`, `Apodo_mascota`, `raza`, `color`, `Altura`,
 --
 
 CREATE TABLE `pago` (
-  `IDpago` int(11) NOT NULL,
+  `IDpago` int NOT NULL,
   `montoTotal` decimal(3,2) NOT NULL,
   `fecha` date NOT NULL,
-  `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fk_cliente` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,14 +106,14 @@ CREATE TABLE `pago` (
 --
 
 CREATE TABLE `reportemedico` (
-  `id_reporteMedico` int(11) NOT NULL,
+  `id_reporteMedico` int NOT NULL,
   `Tratamiento` varchar(200) NOT NULL,
   `Medicamento` varchar(200) NOT NULL,
   `ChequeoGeneral` varchar(200) NOT NULL,
   `fechaReporte` date NOT NULL,
-  `fk_cliente` int(11) NOT NULL,
-  `fk_mascota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `fk_cliente` int NOT NULL,
+  `fk_mascota` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `reportemedico`
@@ -130,14 +130,14 @@ INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `
 --
 
 CREATE TABLE `veterinario` (
-  `id_veterinario` int(11) NOT NULL,
+  `id_veterinario` int NOT NULL,
   `fechaNac` date NOT NULL,
   `Especialidad` varchar(200) NOT NULL,
   `Nombres` varchar(200) NOT NULL,
   `Apellidos` varchar(200) NOT NULL,
   `num_telefonico` varchar(11) NOT NULL,
   `Constraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
@@ -194,37 +194,37 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cita` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mascota` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
-  MODIFY `IDpago` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDpago` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_reporteMedico` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_veterinario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -234,22 +234,28 @@ ALTER TABLE `veterinario`
 -- Filtros para la tabla `cita`
 --
 ALTER TABLE `cita`
-  ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`fk_veterinario`) REFERENCES `veterinario` (`id_veterinario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`),
+  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`fk_veterinario`) REFERENCES `veterinario` (`id_veterinario`),
+  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
 
 --
 -- Filtros para la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  ADD CONSTRAINT `mascota_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `mascota_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
+
+--
+-- Filtros para la tabla `pago`
+--
+ALTER TABLE `pago`
+  ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
 
 --
 -- Filtros para la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  ADD CONSTRAINT `reportemedico_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `reportemedico_ibfk_2` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `reportemedico_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`),
+  ADD CONSTRAINT `reportemedico_ibfk_2` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
