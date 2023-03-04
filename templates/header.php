@@ -37,7 +37,7 @@ body {
   display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background: url(/petbosco2/assets/svg/waves.svg);
+    background: url(/assets/svg/waves.svg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
