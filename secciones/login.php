@@ -33,7 +33,7 @@ if ($_POST) {
 
 <?php include("../templates/header.php");?>
 
-<div class="card text-align-center m-auto p-3">
+<div class="card text-center m-auto p-3">
     <div class="card-header">
         <h3><b>Iniciar sesión</b></h3>
     </div>

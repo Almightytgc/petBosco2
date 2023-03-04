@@ -1,5 +1,5 @@
 <?php
-$url_base = "http://localhost/petBosco/";
+$url_base = "http://localhost/petBosco2/";
 session_start();
 if (!isset($_SESSION['usuario'])) {
   header("location:".$url_base."secciones/login.php");
@@ -41,7 +41,7 @@ body {
   display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background: url(/petbosco/assets/svg/waves.svg);
+    background: url("<?php echo $url_base;?>assets/svg/waves.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -69,7 +69,6 @@ body {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-    <script src="jquery-3.6.3.js"></script>
     <title>PetBosco</title>
 </head>
 <body>

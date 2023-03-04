@@ -1,5 +1,5 @@
 <?php
-$url_base = "http://localhost/petBosco/";
+$url_base = "http://localhost/petBosco2/";
 
 ?>
 
@@ -38,7 +38,7 @@ body {
   display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background: url(/petbosco/assets/svg/waves.svg);
+    background: url("<?php echo $url_base;?>assets/svg/waves.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -66,9 +66,19 @@ body {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-    <script src="jquery-3.6.3.js"></script>
+
+    <!--links jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
+
     <title>PetBosco</title>
 </head>
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
 <body>
 
   <!--inicio de nav-->
@@ -80,8 +90,8 @@ body {
         </ul>
 
         <div class="text-end">
-          <a name="" id="" class="btn btn-outline-light me-2" href="secciones/registro/index.php" role="button">Registrarse</a>
-          <a name="" id="" class="btn btn-outline-light me-2" href="secciones/login.php" role="button">Iniciar sesión</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/registro/index.php" role="button">Registrarse</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/login.php" role="button">Iniciar sesión</a>
         </div>
       </div>
     </div>

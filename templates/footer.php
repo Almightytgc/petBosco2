@@ -18,23 +18,24 @@
 </div>
 <!--fin de footer-->
 
-
-
 </body>
 </html>
 
-<!--script para usar jquery para ordenar la parte de expedientes-->
 <script>
-  $(document).ready(function() {
-    $("#tabla_id").DataTable({
-      "pageLength":3,
-      lenghMenu:[
-        [3, 10, 25]
-      ],
-      "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.13/i18n/ES-.json"
-      }
-    });
-  })
+  $(document).ready( function() {
+  $("#tabla_id").DataTable({
+    "pagesLength": 3,
+    lengthMenu: [
+      [3,10,25,50],
+      [3,10,25,50]
+
+    ],
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+    }
+  });
+  });
 </script>
+
+
 
