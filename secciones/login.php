@@ -19,7 +19,7 @@ if ($_POST) {
 
     //esta condición, verifica que si se encontraron resultados en la sentencia sql
     //vamos a crear las variables de sesión y redireccionamos, sino, tiramos un alert en el formulario
-    if ($registro['n_usuarios'] > 0 && !$_POST) {
+    if ($registro['n_usuarios'] > 0 ) {
         $_SESSION['usuario'] = $registro['usuario'];
         $_SESSION['logueado'] = true;
 
