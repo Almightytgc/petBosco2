@@ -5,7 +5,7 @@ if ($_POST) {
 
     //en esta ocasión hacemos una sub consulta para que cuente los usuarios cuyos datos coinciden
     //con los datos de la tabla clientes
-    $sentencia = $conexion->prepare("SELECT*,count(*) as n_usuarios 
+    $sentencia = $conexion->prepare("SELECT count(*) as n_usuarios 
     FROM cliente WHERE usuario=:usuario AND contraseña=:password");
 
     $usuario = $_POST['usuario'];
@@ -38,10 +38,17 @@ if ($_POST) {
 
 <div class="card text-center m-auto p-3">
     <div class="card-header">
-        <h3><b>Iniciar sesión</b></h3>
-        <div class="alert alert-primary" role="alert">
+    <?php
+    
+    if(!$_POST && ){
+
+        echo '<div class="alert alert-primary" role="alert">
             <strong>Por favor ingrese sus datos</strong>
-        </div>  
+        </div>';  
+    }
+    ?>
+        <h3><b>Iniciar sesión</b></h3>
+        
     </div>
     <div class="card-body">
     <?php if(isset($mensaje)){ ?>
