@@ -5,17 +5,18 @@ if ($_POST) {
 
     //en esta ocasión hacemos una sub consulta para que cuente los usuarios cuyos datos coinciden
     //con los datos de la tabla clientes
-    $sentencia = $conexion->prepare("SELECT*,count(*) as n_usuarios 
-    FROM cliente WHERE usuario=:usuario AND contraseña=:password");
-
+    
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
-
+    $sentencia = $conexion->prepare("SELECT *,count(*) as n_usuarios 
+    FROM cliente WHERE usuario=:usuario AND contraseña=:password");
+    
     $sentencia->bindParam(":usuario", $usuario);
     $sentencia->bindParam(":password", $password);
     $sentencia->execute();
 
     $registro = $sentencia->fetch(PDO::FETCH_LAZY);
+
 
     //esta condición, verifica que si se encontraron resultados en la sentencia sql
     //vamos a crear las variables de sesión y redireccionamos, sino, tiramos un alert en el formulario
