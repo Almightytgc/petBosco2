@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 04-03-2023 a las 18:15:07
--- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-03-2023 a las 16:41:03
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cita` (
-  `id_cita` int NOT NULL,
+  `id_cita` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `motivo` varchar(200) NOT NULL,
-  `fk_cliente` int NOT NULL,
-  `fk_veterinario` int NOT NULL,
-  `fk_mascota` int NOT NULL
+  `fk_cliente` int(11) NOT NULL,
+  `fk_veterinario` int(11) NOT NULL,
+  `fk_mascota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,7 +43,8 @@ CREATE TABLE `cita` (
 --
 
 CREATE TABLE `cliente` (
-  `id_cliente` int NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `usuario` varchar(255) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `fechaNac` date NOT NULL,
@@ -57,8 +58,10 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `fechaNac`, `num_telefonico`, `direccion`, `DUI`, `contraseña`) VALUES
-(3, 'jun', 'lopez', '2023-03-01', '123', 'su casa', '123', '12');
+INSERT INTO `cliente` (`id_cliente`, `usuario`, `nombre`, `apellido`, `fechaNac`, `num_telefonico`, `direccion`, `DUI`, `contraseña`) VALUES
+(3, 'fenix123', 'jun', 'lopez', '2023-03-01', '123', 'su casa', '123', '12'),
+(4, '', 'Juancho José', 'Hernández Castro', '2023-03-08', '61621701', 'su casa ', '123456', '123'),
+(5, '', 'Estefany Liseth ', 'Villafranco Silva', '2023-03-22', '61621701', 'su casa', '123', '123');
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,7 @@ INSERT INTO `cliente` (`id_cliente`, `nombre`, `apellido`, `fechaNac`, `num_tele
 --
 
 CREATE TABLE `mascota` (
-  `id_mascota` int NOT NULL,
+  `id_mascota` int(11) NOT NULL,
   `Apodo_mascota` varchar(200) NOT NULL,
   `raza` varchar(200) NOT NULL,
   `color` varchar(200) NOT NULL,
@@ -76,7 +79,7 @@ CREATE TABLE `mascota` (
   `Peso` varchar(200) NOT NULL,
   `FechaNac` date NOT NULL,
   `especie` varchar(111) NOT NULL,
-  `fk_cliente` int NOT NULL
+  `fk_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -93,10 +96,10 @@ INSERT INTO `mascota` (`id_mascota`, `Apodo_mascota`, `raza`, `color`, `Altura`,
 --
 
 CREATE TABLE `pago` (
-  `IDpago` int NOT NULL,
+  `IDpago` int(11) NOT NULL,
   `montoTotal` decimal(3,2) NOT NULL,
   `fecha` date NOT NULL,
-  `fk_cliente` int NOT NULL
+  `fk_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -106,13 +109,13 @@ CREATE TABLE `pago` (
 --
 
 CREATE TABLE `reportemedico` (
-  `id_reporteMedico` int NOT NULL,
+  `id_reporteMedico` int(11) NOT NULL,
   `Tratamiento` varchar(200) NOT NULL,
   `Medicamento` varchar(200) NOT NULL,
   `ChequeoGeneral` varchar(200) NOT NULL,
   `fechaReporte` date NOT NULL,
-  `fk_cliente` int NOT NULL,
-  `fk_mascota` int NOT NULL
+  `fk_cliente` int(11) NOT NULL,
+  `fk_mascota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -120,8 +123,12 @@ CREATE TABLE `reportemedico` (
 --
 
 INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `ChequeoGeneral`, `fechaReporte`, `fk_cliente`, `fk_mascota`) VALUES
-(5, 'sdfsdf', 'sdfsdf', 'sdafsdf', '2023-03-21', 3, 3),
-(7, '2 veces al dia', 'cocaina', 'aristides', '2023-03-09', 3, 3);
+(11, 'durante 5 días', 'gripol', 'La mascota viene por gripe', '2023-03-22', 3, 3),
+(12, 'durante una semana', 'pulgol', 'El gato viene por exceso de pulgas ', '2023-03-30', 3, 3),
+(13, 'durante un mes ', 'fracturin', 'El hamster se fracturó una pierna', '2023-03-29', 3, 3),
+(14, 'durante 5 días', 'Acetaminofen', 'El cocodrilo siente dolor de estomago', '2023-03-20', 3, 3),
+(15, 'durante 2 días', 'sopa de loro', 'El loro no puede hablar', '2023-04-06', 3, 3),
+(17, 'durante 6 meses', 'corazol', 'El gato terminó una relación amorosa', '2023-03-30', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -130,7 +137,7 @@ INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `
 --
 
 CREATE TABLE `veterinario` (
-  `id_veterinario` int NOT NULL,
+  `id_veterinario` int(11) NOT NULL,
   `fechaNac` date NOT NULL,
   `Especialidad` varchar(200) NOT NULL,
   `Nombres` varchar(200) NOT NULL,
@@ -194,37 +201,37 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
-  MODIFY `IDpago` int NOT NULL AUTO_INCREMENT;
+  MODIFY `IDpago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  MODIFY `id_reporteMedico` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id_veterinario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -234,28 +241,22 @@ ALTER TABLE `veterinario`
 -- Filtros para la tabla `cita`
 --
 ALTER TABLE `cita`
-  ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`),
-  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`fk_veterinario`) REFERENCES `veterinario` (`id_veterinario`),
-  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
+  ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`fk_veterinario`) REFERENCES `veterinario` (`id_veterinario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  ADD CONSTRAINT `mascota_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
-
---
--- Filtros para la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
+  ADD CONSTRAINT `mascota_ibfk_1` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  ADD CONSTRAINT `reportemedico_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`),
-  ADD CONSTRAINT `reportemedico_ibfk_2` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`);
+  ADD CONSTRAINT `reportemedico_ibfk_1` FOREIGN KEY (`fk_mascota`) REFERENCES `mascota` (`id_mascota`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reportemedico_ibfk_2` FOREIGN KEY (`fk_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

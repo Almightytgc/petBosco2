@@ -1,5 +1,6 @@
 <?php
 $url_base = "http://localhost/petBosco/";
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ body {
   display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background: url(/assets/svg/waves.svg);
+    background: url(/petbosco/assets/svg/waves.svg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,10 +63,10 @@ body {
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
       <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-    
+    <script src="jquery-3.6.3.js"></script>
     <title>PetBosco</title>
 </head>
 <body>
@@ -79,8 +80,8 @@ body {
         </ul>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          <a name="" id="" class="btn btn-outline-light me-2" href="secciones/registro/index.php" role="button">Registrarse</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="secciones/login.php" role="button">Iniciar sesión</a>
         </div>
       </div>
     </div>

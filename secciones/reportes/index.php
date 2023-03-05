@@ -5,6 +5,11 @@ $sentencia = $conexion->prepare("SELECT * FROM reportemedico");
 $sentencia->execute();
 $lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+/*codigo para hacer la consulta a la base de datos*/
+$sentencia = $conexion->prepare("SELECT * FROM cliente");
+$sentencia->execute();
+$lista_clientes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 //codigo para borrar datos
 if (isset($_GET['txtID'])) {
     $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
@@ -16,8 +21,10 @@ if (isset($_GET['txtID'])) {
 
 ?>
 
-<?php include("../../templates/header.php"); ?>
+<?php include("../../templates/headeruser.php"); ?>
 
+    <!--linkear jquery-->
+    <script src="jquery-3.6.3.js"></script>
 
 <div class="container d-flex justify-content-center">
     <h1><b>Reportes médicos</b></h1>
@@ -30,7 +37,7 @@ if (isset($_GET['txtID'])) {
     <div class="card-body">
 
     <div class="table-responsive-sm">
-    <table class="table table text-center">
+    <table class="table table text-center tabla_jquery">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -38,8 +45,7 @@ if (isset($_GET['txtID'])) {
                 <th scope="col">Medicamento</th>               
                 <th scope="col">Tratamiento</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">ID del dueño</th>
-                <th scope="col">ID de la mascota</th>
+                <th scope="col">Cliente</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -47,7 +53,7 @@ if (isset($_GET['txtID'])) {
     
 
         <!--aquí usamos el foreach para poder imprimir ciclicamente todos los datos que se encuentren en la consulta-->
-        <?php foreach($lista_reportes as $registro){?>            
+        <?php foreach($lista_reportes as $registro){?>   
             <tr>
                 <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                 <!--lo que va entre corchetes es la llave primaria de la tabla-->
@@ -57,7 +63,6 @@ if (isset($_GET['txtID'])) {
                 <td scope="row"><?php echo $registro['Tratamiento'];?></td>
                 <td scope="row"><?php echo $registro['fechaReporte'];?></td>
                 <td scope="row"><?php echo $registro['fk_cliente'];?></td>
-                <td scope="row"><?php echo $registro['fk_mascota'];?></td>
 
                 <td>
                     <!--boton para editar datos-->
@@ -69,8 +74,6 @@ if (isset($_GET['txtID'])) {
                 </td>
             </tr>
         <?php }?>
-            
-            
         </tbody>
     </table>
 </div>
@@ -78,3 +81,23 @@ if (isset($_GET['txtID'])) {
 
 </div>
 <?php include("../../templates/footer.php"); ?>
+
+<!--script para usar jquery para ordenar la parte de expedientes-->
+<script>
+  $(".tabla_jquery").ready(function() {
+    $(".tabla_jquery").DataTable({
+      "pageLength":3,
+      lenghMenu:[
+        [3, 10, 25]
+      ]
+    });
+  })
+</script>
+
+<!--script para usar jquery para ordenar la parte de expedientes-->
+    <script>
+        $(Document).click(function(){
+            $(".sumir").hide();
+        })
+    </script>
+
