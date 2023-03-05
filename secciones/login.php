@@ -5,18 +5,17 @@ if ($_POST) {
 
     //en esta ocasión hacemos una sub consulta para que cuente los usuarios cuyos datos coinciden
     //con los datos de la tabla clientes
-    
+    $sentencia = $conexion->prepare("SELECT*,count(*) as n_usuarios 
+    FROM cliente WHERE usuario=:usuario AND contraseña=:password");
+
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
-    $sentencia = $conexion->prepare("SELECT *,count(*) as n_usuarios 
-    FROM cliente WHERE usuario=:usuario AND contraseña=:password");
-    
+
     $sentencia->bindParam(":usuario", $usuario);
     $sentencia->bindParam(":password", $password);
     $sentencia->execute();
 
     $registro = $sentencia->fetch(PDO::FETCH_LAZY);
-
 
     //esta condición, verifica que si se encontraron resultados en la sentencia sql
     //vamos a crear las variables de sesión y redireccionamos, sino, tiramos un alert en el formulario
@@ -34,9 +33,15 @@ if ($_POST) {
 
 <?php include("../templates/header.php");?>
 
+<img src="../logos/logo.png" alt="logo">
+
+
 <div class="card text-center m-auto p-3">
     <div class="card-header">
         <h3><b>Iniciar sesión</b></h3>
+        <div class="alert alert-primary" role="alert">
+            <strong>Por favor ingrese sus datos</strong>
+        </div>  
     </div>
     <div class="card-body">
     <?php if(isset($mensaje)){ ?>
@@ -46,7 +51,7 @@ if ($_POST) {
     <?php } ?>
 </div>
 
-        
+
         <form action="" method="post" class="">
             <div class="mb-3">
             <label for="" class="form-label">Usuario</label>
