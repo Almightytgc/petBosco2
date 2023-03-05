@@ -15,6 +15,19 @@ if($_POST) {
     $usuario = (isset($_POST['usuario']) ? $_POST["usuario"]:"");
     $password = (isset($_POST['contrasenia']) ? $_POST["contrasenia"]:"");
 
+    //validemos si hay un registro que tenga el mismo usuario o contraseña
+    $query = $conexion->prepare("SELECT * FROM cliente WHERE usuario = '$usuario' && contraseña = '$password' ");
+    $query->execute();
+    $results = $query->fetchALL();
+
+    if($results==0){
+        
+    }
+
+
+
+
+
     /*preparamos la insercción o sentencia sql */
     $sentencia = $conexion->prepare("INSERT INTO cliente(id_cliente, nombre, apellido, fechaNac, num_telefonico, usuario, contraseña) VALUES (null, :nombre, :apellido, :fecha_nacimiento, :numero_telefonico, :usuario, :contrasenia)");
 
@@ -28,10 +41,11 @@ if($_POST) {
 
     $sentencia->execute();
 
+
     $_SESSION['usuario'] = $registro['usuario'];
     $_SESSION['logueado'] = true;
 
-    header("Location: registroMascota.php");
+    header("Location:registroMascota.php");
 }
 ?>
 
