@@ -1,6 +1,10 @@
 <?php
 $url_base = "http://localhost/petBosco2/";
+
+
 session_start();
+
+
 if (!isset($_SESSION['usuario'])) {
   header("location:".$url_base."secciones/login.php");
 }
@@ -87,7 +91,7 @@ body {
         </ul>
 
         <div class="text-end">
-          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/veterinario/index.php" role="button">Citas</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/index.php" role="button">Citas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/reportes/index.php" role="button">Reportes médicos</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/cerrar.php" role="button">Cerrar sesión</a>
 

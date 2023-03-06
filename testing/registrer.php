@@ -1,9 +1,8 @@
 <?php
-include("../../templates/header.php");
-include("../../conexionBd.php"); 
+include("../templates/header.php");
+include("../conexionBd.php"); 
 
 
-session_start();
 
 /*si se reciben datos por el metodo post*/ 
 if($_POST) {
@@ -29,9 +28,6 @@ if($_POST) {
 
     $sentencia->execute();
 
-    $_SESSION['usuario'] = $registro['usuario'];
-    $_SESSION['logueado'] = true;
-
     header("Location: registroMascota.php");
 }
 ?>
@@ -44,9 +40,6 @@ if($_POST) {
         <div class="card text-center">
             <div class="card-header">
                 <b class="fs-4">Bienvenido</b>
-                <div class="alert alert-primary" role="alert">
-                    <strong>Por favor ingrese sus datos</strong>
-                </div>  
             </div>
 
             <div class="card-body">
@@ -103,7 +96,7 @@ if($_POST) {
 
                     <div class=" d-flex flex-column text-center p-2">
 
-                        <button type="submit" class="btn btn-primary ">Enviar</button>
+                        <button type="submit" class="btn btn-primary ">Submit</button>
                     </div>
                 </form>
             </div>
@@ -124,7 +117,7 @@ if($_POST) {
 
 
     </div>
-    <?php include("../../templates/footer.php");?> 
+    <?php include("../templates/footer.php");?> 
 </body>
 
 </html>

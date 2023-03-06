@@ -54,7 +54,7 @@ $url_base = "http://localhost/petBosco2/";
     </script>
     <body>
 
-    <?php include("../../templates/headeruser.php");?>
+    <?php include("../../templates/headervet.php");?>
 
     <div class="container d-flex justify-content-center">
         <h1><b>Reportes médicos</b></h1>
@@ -101,7 +101,7 @@ $url_base = "http://localhost/petBosco2/";
                             <!--boton para borrar datos-->
 
                             <!--con el ? que está después del .php estamos pidiendo que atrape un parametro, que sería txtID, el contenido de txtID es igual al id que seleccionamos-->
-                            <a name="" id="" class="btn btn-danger" href="javascript:borrar(<?php echo $registro['id_reporteMedico']; ?>);" role="button">Eliminar</a>
+                            <a name="" id="" class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id_reporteMedico']; ?>" role="button">Eliminar</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -110,29 +110,6 @@ $url_base = "http://localhost/petBosco2/";
             </div>
         </div>
     </div>
-
-    <script>
-        function borrar(id) {
-            //index.php?txtID=
-            Swal.fire({
-  title: '¿Desea borrar este reporte?',
-  text: "Los cambios no podrán deshacerse!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#16BE02',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Borrar',
-  cancelButtonText: 'Cancelar'
-}).then((result) => {
-  if (result.isConfirmed) {
-
-    window.location="index.php?txtID="+id;
-
-  }
-})
-        }
-    </script>
-
     <?php include("../../templates/footer.php");?> 
 
 

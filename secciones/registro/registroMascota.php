@@ -57,7 +57,7 @@ if($_POST) {
         <div class="card text-center">
             <div class="card-header">
                 <div class="alert alert-success" role="alert">
-                    <strong>Por favor ingrese los datos de su mascota</strong>
+                    <strong>Sus datos han sido registrados exitosamente, ahora, por favor ingrese los datos de su mascota</strong>
                 </div>          
             </div>
 
@@ -139,7 +139,7 @@ if($_POST) {
 
                     <div class=" d-flex flex-column text-center p-2">
 
-                        <button type="submit" class="btn btn-primary ">Enviar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </form>
             </div>
@@ -161,6 +161,7 @@ if($_POST) {
 
 
     </div>
+
     <?php include("../../templates/footer.php");?> 
 </body>
 
