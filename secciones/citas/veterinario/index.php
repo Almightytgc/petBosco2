@@ -43,7 +43,7 @@ $url_base = "http://localhost/petBosco2/";
     </head>
     <body>
 
-    <?php include("../../../templates/headeruser.php");?>
+    <?php include("../../../templates/headervet.php");?>
 
     <div class="container d-flex justify-content-center">
         <h1><b>citas de <?php echo $_SESSION['usuario'];?></b></h1>

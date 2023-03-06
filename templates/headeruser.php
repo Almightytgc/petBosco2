@@ -88,7 +88,7 @@ body {
         </ul>
 
         <div class="text-end">
-          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/index.php" role="button">Citas</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/cliente/index.php" role="button">Citas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/expedienteUser/index.php" role="button">Expediente médico</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/cerrar.php" role="button">Cerrar sesión</a>
         </div>
