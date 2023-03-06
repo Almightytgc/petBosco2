@@ -72,6 +72,10 @@ body {
     <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
 
+    <!--sweet alert-->
+    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <title>PetBosco</title>
 </head>
 <script>

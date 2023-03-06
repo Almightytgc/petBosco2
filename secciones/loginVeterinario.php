@@ -8,7 +8,7 @@ if ($_POST) {
     //en esta ocasión hacemos una sub consulta para que cuente los usuarios cuyos datos coinciden
     //con los datos de la tabla clientes
     $sentencia = $conexion->prepare("SELECT*,count(*) as n_usuarios 
-    FROM cliente WHERE usuario=:usuario AND contraseña=:password");
+    FROM veterinario WHERE usuario=:usuario AND contraseña=:password");
 
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
@@ -28,7 +28,7 @@ if ($_POST) {
         $id_usuario = $registro['id_cliente'];
         $_SESSION['id_usuario'] = $id_usuario;  
 
-        header("location: indexuser.php");
+        header("location: indexvet.php");
 
     } else {
         $mensaje = "Error: El usuario o la contraseña son incorrectos";
@@ -43,7 +43,7 @@ if ($_POST) {
 
 <div class="card text-center m-auto p-3">
     <div class="card-header">
-        <h3><b>Iniciar sesión</b></h3>
+        <h3><b>Acceso para veterinarios</b></h3>
         <div class="alert alert-primary" role="alert">
             <strong>Por favor ingrese sus datos</strong>
         </div>  
@@ -70,7 +70,7 @@ if ($_POST) {
             </div>
             <div class="container">
                 <input name="" id="" class="btn btn-primary m-auto" type="submit" value="Iniciar sesión">
-                <a name="" id="" class="btn btn-warning" href="loginVeterinario.php" role="button">Iniciar sesión como veterinario</a>
+                <a name="" id="" class="btn btn-danger" href="index.php" role="button">Regresar</a>
             </div>
         </form>
 

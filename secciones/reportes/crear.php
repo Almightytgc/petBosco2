@@ -22,7 +22,7 @@ if($_POST) {
     $mascota = (isset($_POST['idMascota']) ? $_POST["idMascota"]:"");
 
     /*preparamos la insercción o sentencia sql */
-    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporteMedico, ChequeoGeneral, Medicamento, Tratamiento, fechaReporte, fk_cliente, fk_mascota) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha, :idMascota, :fk_cliente)");
+    $sentencia = $conexion->prepare("INSERT INTO reportemedico(id_reporteMedico, ChequeoGeneral, Medicamento, Tratamiento, fechaReporte, fk_cliente) VALUES (null, :chequeogeneral, :medicamento, :tratamiento, :fecha, :fk_cliente)");
 
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":chequeogeneral",$chequeoGeneral);
@@ -30,7 +30,6 @@ if($_POST) {
     $sentencia->bindParam(":tratamiento",$tratamiento);
     $sentencia->bindParam(":fecha",$fechaReporte);
     //$sentencia->bindParam(":idcliente",$cliente);
-    $sentencia->bindParam(":idMascota",$mascota);
     $sentencia->bindParam(":fk_cliente",$cliente);
     $sentencia->execute();
 
@@ -85,16 +84,7 @@ if($_POST) {
               <?php }?>
             </select>
 
-            
-            <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="idMascota">
-              <option selected disabled>Seleccione el ID de la mascota</option>
-              <?php foreach($lista_mascotas as $registro) {?>            
-                <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
-                <!--lo que va entre corchetes es la llave primaria de la tabla-->
-                <option value="<?php echo $registro['id_mascota']?>"><?php echo $registro['id_mascota'].": ".$registro['Apodo_mascota'];?></option>
-              <?php }?>
-            </select>
-
+          
             <button type="submit" class="btn btn-success">Guardar</button>
             <a name="" id="" class="btn btn-danger" href="index.php" role="button">Cancelar</a>
         </form>
