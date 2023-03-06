@@ -103,6 +103,7 @@ if($_POST) {
                     <div class=" d-flex flex-column text-center p-2">
 
                         <button type="submit" class="btn btn-primary ">Enviar</button>
+                        <a href="registroMascota.php" class="text-mute">Necesitas registrar una mascota?</a>
                     </div>
                 </form>
             </div>

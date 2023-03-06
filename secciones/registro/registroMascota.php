@@ -57,7 +57,7 @@ if($_POST) {
         <div class="card text-center">
             <div class="card-header">
                 <div class="alert alert-success" role="alert">
-                    <strong>Sus datos han sido registrados exitosamente, ahora, por favor ingrese los datos de su mascota</strong>
+                    <strong>Por favor ingrese los datos de su mascota</strong>
                 </div>          
             </div>
 
