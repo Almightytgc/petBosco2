@@ -26,7 +26,7 @@ if ($_POST) {
         $_SESSION['logueado'] = true;
         // Guardar el ID del usuario en una variable de sesión
         $id_usuario = $registro['id_cliente'];
-        $_SESSION['id_usuario'] = $id_usuario;  
+        $_SESSION['id_usuario'] = $registro['id_veterinario'];  
 
         header("location: indexvet.php");
 

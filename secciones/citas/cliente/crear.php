@@ -28,6 +28,7 @@ if($_POST) {
     $sentencia = $conexion->prepare("INSERT INTO cita(id_cita, fecha, motivo, fk_cliente, fk_veterinario, fk_mascota )
      VALUES (null, '$fecha', '$motivo', '$fk_cliente', '$fk_veterinario' , '$fk_mascota')");
 
+
     $sentencia->execute();
 
     header("Location: index.php");
