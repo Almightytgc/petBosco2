@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-03-2023 a las 13:29:12
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 06-03-2023 a las 23:08:38
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,15 @@ CREATE TABLE `cita` (
   `fk_cliente` int(11) NOT NULL,
   `fk_veterinario` int(11) NOT NULL,
   `fk_mascota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `cita`
+--
+
+INSERT INTO `cita` (`id_cita`, `fecha`, `motivo`, `fk_cliente`, `fk_veterinario`, `fk_mascota`) VALUES
+(1, '2023-03-08', 'wfwefwe', 3, 2, 3),
+(2, '2023-03-17', 'es bien guapo el loro', 3, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -52,7 +60,7 @@ CREATE TABLE `cliente` (
   `direccion` varchar(200) NOT NULL,
   `DUI` varchar(11) NOT NULL,
   `contraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -63,7 +71,8 @@ INSERT INTO `cliente` (`id_cliente`, `usuario`, `nombre`, `apellido`, `fechaNac`
 (4, '', 'Juancho José', 'Hernández Castro', '2023-03-08', '61621701', 'su casa ', '123456', '123'),
 (5, '', 'Estefany Liseth ', 'Villafranco Silva', '2023-03-22', '61621701', 'su casa', '123', '123'),
 (8, 'omairi', 'Juan Manuel', 'Flores Crisóstomo', '2022-03-31', '12345', '', '', '123'),
-(9, 'paquin', 'levi paco', 'paquin juarez', '2022-04-04', '123', '', '', 'paco');
+(9, 'paquin', 'levi paco', 'paquin juarez', '2022-04-04', '123', '', '', 'paco'),
+(10, 'fewfwe', 'wefwe', 'fwefwef', '1971-01-08', 'efewf', '', '', 'wfe');
 
 -- --------------------------------------------------------
 
@@ -82,31 +91,14 @@ CREATE TABLE `mascota` (
   `FechaNac` date NOT NULL,
   `especie` varchar(111) NOT NULL,
   `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `mascota`
 --
 
 INSERT INTO `mascota` (`id_mascota`, `Apodo_mascota`, `raza`, `color`, `Altura`, `condicionMascota`, `Peso`, `FechaNac`, `especie`, `fk_cliente`) VALUES
-(3, 'popi', 'doberman', 'rojo', '120', 'es bien feo ', '20 libras', '2023-03-01', 'canina ', 3),
-(16, 'edwfwef', 'ewfwef', 'wefwef', 'wefwe', 'fwef', 'weff', '2022-03-31', 'fwef', 5),
-(17, 'erger', 'ergre', 'gregregre', '70', 'le cuesta comer', '10', '2022-03-31', 'reggge', 4),
-(18, 'fifi', 'chihuahua', 'amarillo', '70', 'le cuesta comer', '10', '2022-04-01', 'canino', 8),
-(19, 'frefref', 'erfrefe', 'erfferf', 'refref', 'eferfe', 'erfref', '2022-03-31', 'efefref', 9);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pago`
---
-
-CREATE TABLE `pago` (
-  `IDpago` int(11) NOT NULL,
-  `montoTotal` decimal(3,2) NOT NULL,
-  `fecha` date NOT NULL,
-  `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(3, 'popi', 'doberman', 'rojo', '120', 'es bien feo ', '20 libras', '2023-03-01', 'canina ', 3);
 
 -- --------------------------------------------------------
 
@@ -121,7 +113,7 @@ CREATE TABLE `reportemedico` (
   `ChequeoGeneral` varchar(200) NOT NULL,
   `fechaReporte` date NOT NULL,
   `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `reportemedico`
@@ -148,7 +140,7 @@ CREATE TABLE `veterinario` (
   `Especialidad` varchar(200) NOT NULL,
   `num_telefonico` varchar(11) NOT NULL,
   `contraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `veterinario`
@@ -184,13 +176,6 @@ ALTER TABLE `mascota`
   ADD KEY `fk_cliente` (`fk_cliente`);
 
 --
--- Indices de la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD PRIMARY KEY (`IDpago`),
-  ADD KEY `fk_cliente` (`fk_cliente`);
-
---
 -- Indices de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
@@ -211,25 +196,19 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT de la tabla `pago`
---
-ALTER TABLE `pago`
-  MODIFY `IDpago` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `reportemedico`

@@ -8,6 +8,22 @@ $url_base = "http://localhost/petBosco2/";
     $sentencia->execute();
     $citas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+        /*codigo para hacer la consulta a la base de datos*/
+        $sentencia = $conexion->prepare("SELECT * FROM mascota");
+        $sentencia->execute();
+        $mascotas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+            /*codigo para hacer la consulta a la base de datos*/
+        $sentencia = $conexion->prepare("SELECT * FROM veterinario");
+        $sentencia->execute();
+        $veterinarios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+            /*codigo para hacer la consulta a la base de datos*/
+            $sentencia = $conexion->prepare("SELECT * FROM cliente");
+            $sentencia->execute();
+            $clientes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
     //codigo para borrar datos
     if (isset($_GET['txtID'])) {
         $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
@@ -52,7 +68,7 @@ $url_base = "http://localhost/petBosco2/";
     <div class="card m-auto text-center">
         <div class="card-header">
             <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar cita </a>
-            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexvet.php" role="button">Regresar al inicio</a>
+            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexuser.php" role="button">Regresar al inicio</a>
 
         </div>
         
@@ -79,7 +95,7 @@ $url_base = "http://localhost/petBosco2/";
                             <td scope="row"><?php echo $registro['id_cita'];?></td>
                             <td scope="row"><?php echo $registro['fecha'];?></td>
                             <td scope="row"><?php echo $registro['motivo'];?></td>
-                            <td scope="row"><?php echo $registro['fk_cliente'];?></td>
+                            <td scope="row"><?php echo $_SESSION['usuario'];?></td>
                             <td scope="row"><?php echo $registro['fk_veterinario'];?></td>
                             <td scope="row"><?php echo $registro['fk_mascota'];?></td>
 
@@ -105,7 +121,7 @@ $url_base = "http://localhost/petBosco2/";
         function borrar(id) {
             //index.php?txtID=
             Swal.fire({
-  title: '¿Desea borrar este reporte?',
+  title: '¿Desea borrar este elemento?',
   text: "Los cambios no podrán deshacerse!",
   icon: 'warning',
   showCancelButton: true,

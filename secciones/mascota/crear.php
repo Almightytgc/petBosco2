@@ -1,10 +1,9 @@
 <?php
-include("../../templates/header.php");
+include("../../templates/headeruser.php");
 include("../../conexionBd.php"); 
-session_start();
 
 /*codigo para hacer la consulta a la base de datos*/
-$sentencia = $conexion->prepare("SELECT * FROM cliente");
+$sentencia = $conexion->prepare("SELECT * FROM mascota");
 $sentencia->execute();
 $lista_clientes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,6 +30,7 @@ if($_POST) {
     raza, FechaNac, color, Altura, condicionMascota, Peso, especie, fk_cliente) VALUES (null, :apodo_mascota, 
     :raza, :fecha_nacimiento, :color, :altura, :condicion, :peso, :especie, :idcliente)");
 
+
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":apodo_mascota",$nombre_mascota);
     $sentencia->bindParam(":raza",$raza);
@@ -45,7 +45,7 @@ if($_POST) {
 
     $sentencia->execute();
 
-    header("Location: ../indexuser.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -56,8 +56,8 @@ if($_POST) {
     <div class="justify-content-center rounded w-24">
         <div class="card text-center">
             <div class="card-header">
-                <div class="alert alert-success" role="alert">
-                    <strong>Sus datos han sido registrados exitosamente, ahora, por favor ingrese los datos de su mascota</strong>
+                <div class="alert alert-primary" role="alert">
+                    <strong>Ingrese los datos de la nueva mascota</strong>
                 </div>          
             </div>
 
@@ -94,7 +94,7 @@ if($_POST) {
                     <div class=" d-flex flex-row text-start p-2">
                         <div class="container">
                             <label for="" class="form-label">Altura</label>
-                            <input type="text" class="form-control" name="altura" id="" required placeholder="Digite la altura de su mascota en cm">
+                            <input type="text" class="form-control" name="altura" id="" required placeholder="Digite la altura en cm">
                         </div>
 
                         <div class="container">
@@ -121,12 +121,9 @@ if($_POST) {
 
                     <div class="container">
                     <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="idcliente">
-                        <option selected disabled  >Seleccione el ID del dueño al que va a pertenecer esta mascota</option>
-                        <?php foreach($lista_clientes as $registro) {?>            
+                        <option value="<?php echo $_SESSION['id_usuario']; ?>">ID de <?php echo $_SESSION['usuario'].": ".$_SESSION['id_usuario'];?></option>
                         <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                         <!--lo que va entre corchetes es la llave primaria de la tabla-->
-                        <option value="<?php echo $registro['id_cliente']?>"><?php echo $registro['id_cliente'].": ".$registro['nombre']." ".$registro['apellido'];?></option>
-                        <?php }?>
                     </select>
 
                         </div>

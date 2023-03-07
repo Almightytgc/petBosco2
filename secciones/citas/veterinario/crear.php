@@ -1,10 +1,6 @@
 <?php include("../../../conexionBd.php"); 
 
 
-
-
-
-
 /*codigo para hacer la consulta a la base de datos*/
 $sentencia = $conexion->prepare("SELECT * FROM mascota");
 $sentencia->execute();

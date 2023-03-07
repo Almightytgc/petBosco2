@@ -60,14 +60,9 @@ if ($_POST) {
       <div class="mb-3">
       <label for="" class="form-label">mascota</label>
         <select class="form-select" aria-label="veterinario">
+        
         </select>
-      </div>
-
-      <div class="mb-3">
-      <label for="" class="form-label">veterinario</label>
-        <select class="form-select" aria-label="veterinario">
-        </select>
-      </div>
+      </div> 
  
 
 

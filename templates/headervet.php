@@ -25,9 +25,14 @@ if (!isset($_SESSION['usuario'])) {
     font-family: 'Roboto', sans-serif;
 }
 
-.logo {
-    width: 500px;
-    height: 450px;
+
+
+.vet {
+    width: 550px;
+    height: 350px;
+    border: solid 15px transparent;
+    border-radius: 15px;  
+    padding: 20px;
 }
 
 .encabezado {
@@ -85,7 +90,7 @@ body {
   <!--inicio de nav-->
   <header class="p-3 encabezado mb-5">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="d-flex flex-wrap align--center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <h1>PetBosco</h1>
         </ul>

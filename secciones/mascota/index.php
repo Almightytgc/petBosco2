@@ -1,18 +1,18 @@
-    <?php include("../../conexionBd.php"); 
+<?php include("../../conexionBd.php"); 
 
 $url_base = "http://localhost/petBosco2/";
 
 
     /*codigo para hacer la consulta a la base de datos*/
-    $sentencia = $conexion->prepare("SELECT * FROM reportemedico");
+    $sentencia = $conexion->prepare("SELECT * FROM mascota");
     $sentencia->execute();
-    $lista_reportes=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $mascotas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     //codigo para borrar datos
     if (isset($_GET['txtID'])) {
         $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
-        $sentencia = $conexion->prepare("DELETE FROM reportemedico WHERE id_reporteMedico=:id_reporte");
-        $sentencia->bindParam(":id_reporte", $txtID);
+        $sentencia = $conexion->prepare("DELETE FROM mascota WHERE id_mascota=:id_mascota");
+        $sentencia->bindParam(":id_mascota", $txtID);
         $sentencia->execute();
         header("location: index.php");
     }
@@ -41,29 +41,18 @@ $url_base = "http://localhost/petBosco2/";
         <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
         <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
     </head>
-    <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable(
-                {"pageLength":25,
-                    "language": {
-                        "url":"https://cdn.datatables.net/plug-ins/1.13.3/i18n/es-ES.json"
-                    }
-                }
-            );
-        } );
-    </script>
     <body>
 
-    <?php include("../../templates/headervet.php");?>
+    <?php include("../../templates/headeruser.php");?>
 
     <div class="container d-flex justify-content-center">
-        <h1><b>Reportes médicos</b></h1>
+        <h1><b>Mascotas de <?php echo $_SESSION['usuario'];?></b></h1>
     </div>
 
     <div class="card m-auto text-center">
         <div class="card-header">
-            <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar registro</a>
-            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexvet.php" role="button">Regresar al inicio</a>
+            <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar mascota </a>
+            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexuser.php" role="button">Regresar al inicio</a>
 
         </div>
         
@@ -73,35 +62,44 @@ $url_base = "http://localhost/petBosco2/";
                 <table id="myTable" class="display table table text-center table-bordered border-dark table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Descripción chequeo general</th>
-                            <th scope="col">Medicamento</th>               
-                            <th scope="col">Tratamiento</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Cliente</th>
+                            <th scope="col">ID de mascota</th>
+                            <th scope="col">Nombre / apodo</th>
+                            <th scope="col">Raza</th>               
+                            <th scope="col">Color</th>
+                            <th scope="col">Altura</th>
+                            <th scope="col">Peso</th>
+                            <th scope="col">Fecha de nacimiento</th>
+                            <th scope="col">Especie</th>
+                            <th scope="col">ID de <?php echo $_SESSION['usuario'];?></th>
                             <th scope="col">Acciones</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($lista_reportes as $registro): ?>
+                        <?php foreach ($mascotas as $registro): ?>
                         <tr>
                             <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                             <!--lo que va entre corchetes es la llave primaria de la tabla-->
-                            <td scope="row"><?php echo $registro['id_reporteMedico'];?></td>
-                            <td scope="row"><?php echo $registro['ChequeoGeneral'];?></td>
-                            <td scope="row"><?php echo $registro['Medicamento'];?></td>
-                            <td scope="row"><?php echo $registro['Tratamiento'];?></td>
-                            <td scope="row"><?php echo $registro['fechaReporte'];?></td>
+                            <td scope="row"><?php echo $registro['id_mascota'];?></td>
+                            <td scope="row"><?php echo $registro['Apodo_mascota'];?></td>
+                            <td scope="row"><?php echo $registro['raza'];?></td>
+                            <td scope="row"><?php echo $registro['color'];?></td>
+                            <td scope="row"><?php echo $registro['Altura'];?></td>
+                            <td scope="row"><?php echo $registro['Peso'];?></td>
+                            <td scope="row"><?php echo $registro['FechaNac'];?></td>
+                            <td scope="row"><?php echo $registro['especie'];?></td>
                             <td scope="row"><?php echo $registro['fk_cliente'];?></td>
+
 
                             <td>
                             <!--boton para editar datos-->
-                            <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_reporteMedico']; ?>" role="button">Actualizar</a>
-                            <br>--------------
+
+                            <br>
+
                             <!--boton para borrar datos-->
 
                             <!--con el ? que está después del .php estamos pidiendo que atrape un parametro, que sería txtID, el contenido de txtID es igual al id que seleccionamos-->
-                            <a name="" id="" class="btn btn-danger" href="javascript:borrar(<?php echo $registro['id_reporteMedico']; ?>);" role="button">Eliminar</a>
+                            <a name="" id="" class="btn btn-danger" href="javascript:borrar(<?php echo $registro['id_mascota']; ?>);" role="button">Eliminar</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -110,9 +108,8 @@ $url_base = "http://localhost/petBosco2/";
             </div>
         </div>
     </div>
-    <?php include("../../templates/footer.php");?> 
 
-        <script>
+    <script>
         function borrar(id) {
             //index.php?txtID=
             Swal.fire({
@@ -133,6 +130,9 @@ $url_base = "http://localhost/petBosco2/";
 })
         }
     </script>
+
+    <?php include("../../templates/footer.php");?> 
+
 
     </body>
     </html>

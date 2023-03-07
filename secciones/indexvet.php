@@ -11,8 +11,8 @@ include("../conexionBd.php");
         <h1 class="display-4 fw-bold lh-1">Bienvenido doctor <?php echo $_SESSION['usuario'] ;?></h1>
         <p class="lead pDescripcion">Su trabajo es mucho más que simplemente cuidar de los animales. Ustedes son guardianes de la salud y el bienestar de nuestros amigos de cuatro patas, y en muchos casos, sus vidas dependen de ustedes.</p>
       </div>
-      <div class="col-lg-4 offset-lg-1 p-5 overflow-hidden d-flex justify-content-center">
-          <img class="logo" src="../logos/logo.png" alt="">
+      <div class="col-lg-4 offset-lg-1 p-5 overflow-hidden d-flex justify-content-center ">
+          <img class="vet" src="../img/vet.jpg" alt="">
       </div>
     </div>
   </div>

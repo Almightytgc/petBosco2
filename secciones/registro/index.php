@@ -68,7 +68,7 @@ if($_POST) {
                     <div class=" d-flex flex-row text-start p-2">
                         <div class="container">
                             <label for="" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento" max='2022-04-04' id="" required>
+                            <input type="date" class="form-control" name="fecha_nacimiento"  min="1970-12-31" max="2004-12-31" id="" required>
                         </div>
 
                         <div class="container">
