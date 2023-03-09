@@ -64,7 +64,6 @@ if($_POST) {
         <form action="" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
-          <label for="" class="form-label">ID</label>
           <input type="hidden"
           value = "<?php echo $txtID;?>"
             class="form-control" readonly name="txtID" id="txtID" aria-describedby="helpId" placeholder="ID">

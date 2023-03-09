@@ -3,6 +3,8 @@ include("../../templates/header.php");
 include("../../conexionBd.php"); 
 session_start();
 
+$_SESSION['id_usuario'] = $id_usuario;  
+
 /*codigo para hacer la consulta a la base de datos*/
 $sentencia = $conexion->prepare("SELECT * FROM cliente");
 $sentencia->execute();

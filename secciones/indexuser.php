@@ -1,5 +1,8 @@
 <?php 
 include("../conexionBd.php");
+
+$url_base = "http://localhost/petBosco2/";
+
 ?>
 <?php include("../templates/headeruser.php");?>
 <body>
@@ -12,7 +15,7 @@ include("../conexionBd.php");
         <p class="lead pDescripcion">Nuestra misión es proporcionar una atención de alta calidad y compasiva para tus mascotas. Nuestros veterinarios altamente capacitados y dedicados tienen años de experiencia en la atención de una amplia variedad de animales, desde perros y gatos hasta animales exóticos.</p>
       </div>
       <div class="col-lg-4 offset-lg-1 p-5 overflow-hidden d-flex justify-content-center">
-          <img class="logo" src="../logos/logo.png" alt="">
+          <img class="" src="<?php echo $url_base ?>img/smile.png" alt="">
       </div>
     </div>
   </div>

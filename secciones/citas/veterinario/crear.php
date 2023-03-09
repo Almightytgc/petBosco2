@@ -27,7 +27,6 @@ if($_POST) {
      $sentencia = $conexion->prepare("INSERT INTO cita(id_cita, fecha, motivo, fk_cliente, fk_veterinario, fk_mascota )
      VALUES (null, '$fecha', '$motivo', '$fk_cliente', '$fk_veterinario' , '$fk_mascota')");
 
-
     $sentencia->execute();
 
     header("Location: index.php");
@@ -49,9 +48,16 @@ if($_POST) {
         <form action="" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
+          <input type="hidden"
+          value = "<?php echo $txtID;?>"
+            class="form-control" readonly name="txtID" id="txtID" aria-describedby="helpId" placeholder="ID">
+        </div>
+
+
+        <div class="mb-3">
               <label for="" class="form-label">Fecha de cita</label>
               <input type="date"
-              min="2023-01-01" required  max="2023-12-31" class="form-control" name="fecha" id="fecha" aria-describedby="helpId">
+              min="2023-01-01" required  class="form-control" name="fecha" id="fecha" aria-describedby="helpId">
             </div>
 
 
@@ -72,7 +78,7 @@ if($_POST) {
             </select>
 
             <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="id_cliente">
-              <option selected disabled  >Seleccionar el dueño de la mascota </option>
+              <option selected disabled  >Seleccione el dueño de la mascota </option>
               <?php foreach($lista_cliente as $registro) {?>            
                 <option value="<?php echo $registro['id_cliente']?>"> <?php echo $registro['id_cliente'].": ".$registro['nombre']." - ".$registro['apellido'];?></option>
               <?php }?>

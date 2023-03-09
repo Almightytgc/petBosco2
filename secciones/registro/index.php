@@ -14,11 +14,12 @@ if($_POST) {
     $fecha_nacimiento = (isset($_POST['fecha_nacimiento']) ? $_POST["fecha_nacimiento"]:"");
     $num_telefonico = (isset($_POST['numero_telefonico']) ? $_POST["numero_telefonico"]:"");
     $direccion = (isset($_POST['direccion']) ? $_POST["direccion"]:"");
+    $dui = (isset($_POST['dui']) ? $_POST["dui"]:"");
     $usuario = (isset($_POST['usuario']) ? $_POST["usuario"]:"");
     $password = (isset($_POST['contrasenia']) ? $_POST["contrasenia"]:"");
 
     /*preparamos la insercción o sentencia sql */
-    $sentencia = $conexion->prepare("INSERT INTO cliente(id_cliente, nombre, apellido, fechaNac, num_telefonico, direccion, usuario, contraseña) VALUES (null, :nombre, :apellido, :fecha_nacimiento, :numero_telefonico, :direccion, :usuario, :contrasenia)");
+    $sentencia = $conexion->prepare("INSERT INTO cliente(id_cliente, nombre, apellido, fechaNac, num_telefonico, direccion, DUI, usuario, contraseña) VALUES (null, :nombre, :apellido, :fecha_nacimiento, :numero_telefonico, :direccion, :dui, :usuario, :contrasenia)");
 
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":nombre",$nombres);
@@ -26,6 +27,7 @@ if($_POST) {
     $sentencia->bindParam(":fecha_nacimiento",$fecha_nacimiento);
     $sentencia->bindParam(":numero_telefonico",$num_telefonico);
     $sentencia->bindParam(":direccion",$direccion);
+    $sentencia->bindParam(":dui",$dui);
     $sentencia->bindParam(":usuario",$usuario);
     $sentencia->bindParam(":contrasenia",$password);
 
@@ -75,20 +77,26 @@ if($_POST) {
 
                         <div class="container">
                             <label for="" class="form-label">Numero telefónico</label>
-                            <input type="text" class="form-control" name="numero_telefonico" id="" placeholder="contraseña" required>
+                            <input type="text" class="form-control" name="numero_telefonico" id="" placeholder="Número telefónico" required>
 
                         </div>
 
                     </div>
 
-                    <div class=" d-flex flex-column text-center p-2">
+                    <div class=" d-flex flex-row text-start p-2">
                         <div class="container">
                             <label for="" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="direccion" id="" placeholder="contraseña" required>
+                            <input type="text" class="form-control" name="direccion" required>
+                        </div>
+
+                        <div class="container">
+                            <label for="" class="form-label">DUI</label>
+                            <input type="text" class="form-control" name="dui" id="" placeholder="DUI" required>
 
                         </div>
 
-                        
+                    </div>
+
                     </div>
 
                     <div class=" d-flex flex-column text-center p-2">

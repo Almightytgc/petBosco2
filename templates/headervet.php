@@ -25,10 +25,6 @@ if (!isset($_SESSION['usuario'])) {
     font-family: 'Roboto', sans-serif;
 }
 
-.logo {
-    width: 500px;
-    height: 450px;
-}
 
 .encabezado {
     background-color: #3f3434;
@@ -91,6 +87,8 @@ body {
         </ul>
 
         <div class="text-end">
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/vistausers.php" role="button">Clientes</a>
+          <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/mascota/indexvet.php" role="button">Mascotas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/veterinario" role="button">Citas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/reportes/index.php" role="button">Reportes médicos</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/cerrar.php" role="button">Cerrar sesión</a>

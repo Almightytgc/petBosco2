@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-03-2023 a las 23:08:38
+-- Tiempo de generación: 09-03-2023 a las 22:42:47
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -41,8 +41,7 @@ CREATE TABLE `cita` (
 --
 
 INSERT INTO `cita` (`id_cita`, `fecha`, `motivo`, `fk_cliente`, `fk_veterinario`, `fk_mascota`) VALUES
-(1, '2023-03-08', 'wfwefwe', 3, 2, 3),
-(2, '2023-03-17', 'es bien guapo el loro', 3, 2, 3);
+(12, '2023-03-15', 'El perro se encuentra con gripe', 12, 3, 31);
 
 -- --------------------------------------------------------
 
@@ -67,12 +66,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `usuario`, `nombre`, `apellido`, `fechaNac`, `num_telefonico`, `direccion`, `DUI`, `contraseña`) VALUES
-(3, 'fenix123', 'jun', 'lopez', '2023-03-01', '123', 'su casa', '123', '12'),
-(4, '', 'Juancho José', 'Hernández Castro', '2023-03-08', '61621701', 'su casa ', '123456', '123'),
-(5, '', 'Estefany Liseth ', 'Villafranco Silva', '2023-03-22', '61621701', 'su casa', '123', '123'),
-(8, 'omairi', 'Juan Manuel', 'Flores Crisóstomo', '2022-03-31', '12345', '', '', '123'),
-(9, 'paquin', 'levi paco', 'paquin juarez', '2022-04-04', '123', '', '', 'paco'),
-(10, 'fewfwe', 'wefwe', 'fwefwef', '1971-01-08', 'efewf', '', '', 'wfe');
+(12, 'pillin', 'Gustavo Ángel ', 'Diostío Najarro', '2004-04-14', '75548939', 'Colonia PetBosco', '00038406', 'pillin1234');
 
 -- --------------------------------------------------------
 
@@ -98,7 +92,7 @@ CREATE TABLE `mascota` (
 --
 
 INSERT INTO `mascota` (`id_mascota`, `Apodo_mascota`, `raza`, `color`, `Altura`, `condicionMascota`, `Peso`, `FechaNac`, `especie`, `fk_cliente`) VALUES
-(3, 'popi', 'doberman', 'rojo', '120', 'es bien feo ', '20 libras', '2023-03-01', 'canina ', 3);
+(31, 'Terry', 'Pitbull', 'Blanco', '55 cm', 'No', '15 libras', '2022-06-15', 'canino', 12);
 
 -- --------------------------------------------------------
 
@@ -120,10 +114,7 @@ CREATE TABLE `reportemedico` (
 --
 
 INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `ChequeoGeneral`, `fechaReporte`, `fk_cliente`) VALUES
-(12, 'durante una semana', 'pulgol', 'El gato viene por exceso de pulgas ', '2023-03-30', 3),
-(23, 'durante 1 mes', 'patol', 'el gato se quebró la pata', '2023-03-22', 5),
-(24, 'durante 5 días', 'gripol', 'La mascota viene por gripe', '2023-03-16', 3),
-(25, 'durante 2 semanas ', 'parasitol', 'desparasitar al perro', '2023-03-11', 8);
+(26, 'durante una semana', 'pulgol', 'El perro viene por gripe', '2023-03-15', 12);
 
 -- --------------------------------------------------------
 
@@ -147,7 +138,8 @@ CREATE TABLE `veterinario` (
 --
 
 INSERT INTO `veterinario` (`id_veterinario`, `Nombres`, `Apellidos`, `usuario`, `fechaNac`, `Especialidad`, `num_telefonico`, `contraseña`) VALUES
-(2, 'Alfredo Baltazar', 'Espinoza Juarez', 'afedoEspino', '2022-10-12', 'general', '123456', '12');
+(2, 'Alfredo Baltazar', 'Espinoza Juarez', 'afedoEspino', '2022-10-12', 'general', '123456', '12'),
+(3, 'Víctor Alexander ', 'Guevara Campos', 'victer', '2000-03-23', 'Anestesiólogo', '54213698', 'victertilin');
 
 --
 -- Índices para tablas volcadas
@@ -196,31 +188,31 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
