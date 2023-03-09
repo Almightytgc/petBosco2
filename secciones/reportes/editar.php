@@ -71,29 +71,29 @@ if($_POST) {
               <label for="" class="form-label">Descripción del chequeo general</label>
               <input type="text"
               value = "<?php echo $chequeoGeneral;?>"
-                class="form-control" name="chequeogeneral" id="chequeogeneral" aria-describedby="helpId" placeholder="Nombre del puesto">
+                class="form-control" name="chequeogeneral" id="chequeogeneral" aria-describedby="helpId" placeholder="Descripción">
           </div>
 
 
             <div class="mb-3">
               <label for="" class="form-label">Medicamento</label>
               <input type="text"
-              value = "<?php echo $medicamento?>"
-                class="form-control" name="medicamento" id="medicamento" aria-describedby="helpId" placeholder="Nombre del puesto">
+              value = "<?php echo $medicamento; ?>"
+                class="form-control" name="medicamento" id="medicamento" aria-describedby="helpId" placeholder="Medicamento">
             </div>
 
             <div class="mb-3">
               <label for="" class="form-label">Tratamiento</label>
               <input type="text"
-              value = "<?php echo $tratamiento?>"
-                class="form-control" name="tratamiento" id="tratamiento" aria-describedby="helpId" placeholder="Nombre del puesto">
+              value = "<?php echo $tratamiento; ?>"
+                class="form-control" name="tratamiento" id="tratamiento" aria-describedby="helpId" placeholder="Tratamiento">
             </div>
 
             <div class="mb-3">
               <label for="" class="form-label">Fecha</label>
               <input type="date"
-              value = "<?php echo $fechareporte?>"
-                class="form-control" name="fechareporte" id="fechareporte" aria-describedby="helpId" placeholder="Nombre del puesto">
+              value = "<?php echo $fechareporte; ?>"
+                class="form-control" name="fechareporte" id="fechareporte" aria-describedby="helpId" placeholder="Fecha de reporte">
             </div>
             <button type="submit" class="btn btn-success">Actualizar</button>
             <a name="" id="" class="btn btn-danger" href="index.php" role="button">Cancelar</a>                    

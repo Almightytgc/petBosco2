@@ -41,12 +41,24 @@ $url_base = "http://localhost/petBosco2/";
         <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
         <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
     </head>
+
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable(
+                {"pageLength":25,
+                    "language": {
+                        "url":"https://cdn.datatables.net/plug-ins/1.13.3/i18n/es-ES.json"
+                    }
+                }
+            );
+        } );
+    </script>
     <body>
 
     <?php include("../../../templates/headervet.php");?>
 
     <div class="container d-flex justify-content-center">
-        <h1><b>citas de <?php echo $_SESSION['usuario'];?></b></h1>
+        <h1><b>Citas médicas</b></h1>
     </div>
 
     <div class="card m-auto text-center">
@@ -87,7 +99,7 @@ $url_base = "http://localhost/petBosco2/";
                             <!--boton para editar datos-->
 
                             <br>
-
+                            <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_cita']; ?>" role="button">Actualizar</a> <br> ----------
                             <!--boton para borrar datos-->
 
                             <!--con el ? que está después del .php estamos pidiendo que atrape un parametro, que sería txtID, el contenido de txtID es igual al id que seleccionamos-->

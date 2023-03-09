@@ -8,10 +8,10 @@ include("../../templates/headeruser.php");
 $id = $_SESSION['id_usuario'];
 
 // Hacer la consulta a la base de datos filtrando por el ID de sesión
-$sentencia = $conexion->prepare("SELECT * FROM mascota WHERE fk_cliente = :id_usuario");
+$sentencia = $conexion->prepare("SELECT * FROM cliente WHERE id_cliente = :id_usuario");
 $sentencia->bindParam(':id_usuario', $id);
 $sentencia->execute();
-$mascotas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+$clientes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     //codigo para borrar datos
     if (isset($_GET['txtID'])) {
@@ -50,12 +50,11 @@ $mascotas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
     <div class="container d-flex justify-content-center">
-        <h1><b>Mascotas de <?php echo $_SESSION['usuario'];?></b></h1>
+        <h1><b>Perfil <?php echo $_SESSION['usuario'];?></b></h1>
     </div>
 
     <div class="card m-auto text-center">
         <div class="card-header">
-            <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar mascota </a>
             <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexuser.php" role="button">Regresar al inicio</a>
 
         </div>
@@ -66,34 +65,38 @@ $mascotas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 <table id="myTable" class="display table table text-center table-bordered border-dark table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">ID de mascota</th>
-                            <th scope="col">Nombre / apodo</th>
-                            <th scope="col">Raza</th>               
-                            <th scope="col">Color</th>
-                            <th scope="col">Altura</th>
-                            <th scope="col">Peso</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>               
                             <th scope="col">Fecha de nacimiento</th>
-                            <th scope="col">Especie</th>
+                            <th scope="col">Número telefónico</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">DUI</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Contraseña</th>
                             <th scope="col">ID de <?php echo $_SESSION['usuario'];?></th>
+                            <th scope="col">Acciones</th>
+
+
 
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mascotas as $registro): ?>
+                        <?php foreach ($clientes as $registro): ?>
                         <tr>
                             <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                             <!--lo que va entre corchetes es la llave primaria de la tabla-->
-                            <td scope="row"><?php echo $registro['id_mascota'];?></td>
-                            <td scope="row"><?php echo $registro['Apodo_mascota'];?></td>
-                            <td scope="row"><?php echo $registro['raza'];?></td>
-                            <td scope="row"><?php echo $registro['color'];?></td>
-                            <td scope="row"><?php echo $registro['Altura'];?></td>
-                            <td scope="row"><?php echo $registro['Peso'];?></td>
-                            <td scope="row"><?php echo $registro['FechaNac'];?></td>
-                            <td scope="row"><?php echo $registro['especie'];?></td>
-                            <td scope="row"><?php echo $registro['fk_cliente'];?></td>
-
-
+                            <td scope="row"><?php echo $registro['nombre'];?></td>
+                            <td scope="row"><?php echo $registro['apellido'];?></td>
+                            <td scope="row"><?php echo $registro['fechaNac'];?></td>
+                            <td scope="row"><?php echo $registro['num_telefonico'];?></td>
+                            <td scope="row"><?php echo $registro['direccion'];?></td>
+                            <td scope="row"><?php echo $registro['DUI'];?></td>
+                            <td scope="row"><?php echo $registro['usuario'];?></td>
+                            <td scope="row">******</td>
+                            <td scope="row"><?php echo $registro['id_cliente'];?></td>
+                            <td>
+                            <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id_cliente']; ?>" role="button">Actualizar</a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

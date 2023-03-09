@@ -13,17 +13,19 @@ if($_POST) {
     $apellidos = (isset($_POST['apellido']) ? $_POST["apellido"]:"");
     $fecha_nacimiento = (isset($_POST['fecha_nacimiento']) ? $_POST["fecha_nacimiento"]:"");
     $num_telefonico = (isset($_POST['numero_telefonico']) ? $_POST["numero_telefonico"]:"");
+    $direccion = (isset($_POST['direccion']) ? $_POST["direccion"]:"");
     $usuario = (isset($_POST['usuario']) ? $_POST["usuario"]:"");
     $password = (isset($_POST['contrasenia']) ? $_POST["contrasenia"]:"");
 
     /*preparamos la insercción o sentencia sql */
-    $sentencia = $conexion->prepare("INSERT INTO cliente(id_cliente, nombre, apellido, fechaNac, num_telefonico, usuario, contraseña) VALUES (null, :nombre, :apellido, :fecha_nacimiento, :numero_telefonico, :usuario, :contrasenia)");
+    $sentencia = $conexion->prepare("INSERT INTO cliente(id_cliente, nombre, apellido, fechaNac, num_telefonico, direccion, usuario, contraseña) VALUES (null, :nombre, :apellido, :fecha_nacimiento, :numero_telefonico, :direccion, :usuario, :contrasenia)");
 
     //asigando los valores que vienen del método post (que vienen del formulario)
     $sentencia->bindParam(":nombre",$nombres);
     $sentencia->bindParam(":apellido",$apellidos);
     $sentencia->bindParam(":fecha_nacimiento",$fecha_nacimiento);
     $sentencia->bindParam(":numero_telefonico",$num_telefonico);
+    $sentencia->bindParam(":direccion",$direccion);
     $sentencia->bindParam(":usuario",$usuario);
     $sentencia->bindParam(":contrasenia",$password);
 
@@ -81,6 +83,8 @@ if($_POST) {
 
                     <div class=" d-flex flex-column text-center p-2">
                         <div class="container">
+                            <label for="" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" id="" placeholder="contraseña" required>
 
                         </div>
 

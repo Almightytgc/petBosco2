@@ -2,11 +2,16 @@
 
 $url_base = "http://localhost/petBosco2/";
 
+ include("../../../templates/headeruser.php");
 
-    /*codigo para hacer la consulta a la base de datos*/
-    $sentencia = $conexion->prepare("SELECT * FROM cita");
-    $sentencia->execute();
-    $citas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+// Obtener el ID guardado en la variable de sesión
+$id = $_SESSION['id_usuario'];
+
+// Hacer la consulta a la base de datos filtrando por el ID de sesión
+$sentencia = $conexion->prepare("SELECT * FROM cita WHERE fk_cliente = :id_usuario");
+$sentencia->bindParam(':id_usuario', $id);
+$sentencia->execute();
+$citas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         /*codigo para hacer la consulta a la base de datos*/
         $sentencia = $conexion->prepare("SELECT * FROM mascota");
@@ -59,10 +64,9 @@ $url_base = "http://localhost/petBosco2/";
     </head>
     <body>
 
-    <?php include("../../../templates/headeruser.php");?>
 
     <div class="container d-flex justify-content-center">
-        <h1><b>citas de <?php echo $_SESSION['usuario'];?></b></h1>
+        <h1><b>Citas de <?php echo $_SESSION['usuario'];?></b></h1>
     </div>
 
     <div class="card m-auto text-center">
@@ -81,7 +85,6 @@ $url_base = "http://localhost/petBosco2/";
                             <th scope="col">ID</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Motivo</th>               
-                            <th scope="col">ID del cliente</th>
                             <th scope="col">ID del veterinario</th>
                             <th scope="col">ID de la mascota</th>
                             <th scope="col">Acciones</th>
@@ -95,7 +98,6 @@ $url_base = "http://localhost/petBosco2/";
                             <td scope="row"><?php echo $registro['id_cita'];?></td>
                             <td scope="row"><?php echo $registro['fecha'];?></td>
                             <td scope="row"><?php echo $registro['motivo'];?></td>
-                            <td scope="row"><?php echo $_SESSION['usuario'];?></td>
                             <td scope="row"><?php echo $registro['fk_veterinario'];?></td>
                             <td scope="row"><?php echo $registro['fk_mascota'];?></td>
 

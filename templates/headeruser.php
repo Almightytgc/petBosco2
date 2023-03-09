@@ -23,10 +23,8 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 .logo {
-    width: 600px;
-    height: 250px;
-    padding: 10px;
-    border-radius: 15px;
+    width: 500px;
+    height: 450px;
 }
 
 .encabezado {
@@ -90,6 +88,7 @@ body {
         </ul>
 
         <div class="text-end">
+        <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/editarPerfil/index.php" role="button">Perfil</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/mascota/index.php" role="button">Mascotas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/citas/cliente/index.php" role="button">Citas</a>
           <a name="" id="" class="btn btn-outline-light me-2" href="<?php echo $url_base;?>secciones/expedienteUser/index.php" role="button">Expediente médico</a>
