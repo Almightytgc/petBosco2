@@ -66,7 +66,7 @@ if($_POST) {
               
 
 
-            <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="id_mascota">
+            <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="id_mascota" required>
               <option selected disabled  >Seleccione el ID de la mascota </option>
               <?php foreach($lista_mascotas as $registro) {?>            
                 <option value="<?php echo $registro['id_mascota']?>"> <?php echo $registro['id_mascota'].": ".$registro['Apodo_mascota'];?></option>

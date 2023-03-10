@@ -120,7 +120,7 @@ if($_POST) {
                     </div>
 
                     <div class="container">
-                    <select required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="idcliente">
+                    <select hidden required class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="idcliente">
                         <option value="<?php echo $_SESSION['id_usuario']; ?>">ID de <?php echo $_SESSION['usuario'].": ".$_SESSION['id_usuario'];?></option>
                         <!--codigo de php en donde llamamos a la consulta para insertar los datos php echo $registro['id_puesto']-->
                         <!--lo que va entre corchetes es la llave primaria de la tabla-->

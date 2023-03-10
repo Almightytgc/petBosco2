@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2023 a las 05:40:56
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 10-03-2023 a las 15:57:47
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,14 +34,14 @@ CREATE TABLE `cita` (
   `fk_cliente` int(11) NOT NULL,
   `fk_veterinario` int(11) NOT NULL,
   `fk_mascota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `cita`
 --
 
 INSERT INTO `cita` (`id_cita`, `fecha`, `motivo`, `fk_cliente`, `fk_veterinario`, `fk_mascota`) VALUES
-(12, '2023-03-14', 'El perro se encuentra con gripe', 12, 3, 31);
+(12, '2023-03-08', 'El perro se encuentra con gripe', 12, 3, 31);
 
 -- --------------------------------------------------------
 
@@ -59,14 +59,15 @@ CREATE TABLE `cliente` (
   `direccion` varchar(200) NOT NULL,
   `DUI` varchar(11) NOT NULL,
   `contraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`id_cliente`, `usuario`, `nombre`, `apellido`, `fechaNac`, `num_telefonico`, `direccion`, `DUI`, `contraseña`) VALUES
-(12, 'pilin', 'Gustavo Ángel ', 'Diostío Najarro', '2004-04-14', '61621701', 'sierra morena', '00038406', '12');
+(12, 'pilin', 'Gustavo Ángel ', 'Diostío Najarro', '2004-04-14', '61621701', 'residencial petBosco', '00038406', '12'),
+(23, 'e', 'a', 'a', '2004-12-14', 'a', 'a', 'a', 'e');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,7 @@ CREATE TABLE `mascota` (
   `FechaNac` date NOT NULL,
   `especie` varchar(111) NOT NULL,
   `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `mascota`
@@ -107,14 +108,7 @@ CREATE TABLE `reportemedico` (
   `ChequeoGeneral` varchar(200) NOT NULL,
   `fechaReporte` date NOT NULL,
   `fk_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `reportemedico`
---
-
-INSERT INTO `reportemedico` (`id_reporteMedico`, `Tratamiento`, `Medicamento`, `ChequeoGeneral`, `fechaReporte`, `fk_cliente`) VALUES
-(26, 'aaaaa', 'aaaaaaaa', 'aaaaaaaa', '2023-03-24', 12);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -131,7 +125,7 @@ CREATE TABLE `veterinario` (
   `Especialidad` varchar(200) NOT NULL,
   `num_telefonico` varchar(11) NOT NULL,
   `contraseña` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `veterinario`
@@ -139,7 +133,12 @@ CREATE TABLE `veterinario` (
 
 INSERT INTO `veterinario` (`id_veterinario`, `Nombres`, `Apellidos`, `usuario`, `fechaNac`, `Especialidad`, `num_telefonico`, `contraseña`) VALUES
 (2, 'Alfredo Baltazar', 'Espinoza Juarez', 'afedoEspino', '2022-10-12', 'general', '123456', '12'),
-(3, 'Víctor Alexander ', 'Guevara Campos', 'victer', '2000-03-23', 'Anestesiólogo', '54213698', 'victertilin');
+(3, 'Víctor Alexander ', 'Guevara Campos', 'victer', '2000-03-23', 'Anestesiólogo', '54213698', 'victertilin'),
+(4, 'Jorge Armando', 'Hernández González', 'yorch', '1994-03-16', 'cirujano', '1234567', '12'),
+(5, 'Juan Manuel', 'Flores Crisóstomo', 'omairi', '2023-03-14', 'Ortopedista', '12345678', '12'),
+(6, 'Christian Levi', 'González Castro', 'vile', '1996-03-25', 'Fisioterapista', '123456', 'a'),
+(7, 'Ángel Gustavo', 'Najarro Diostío', 'drtavo', '1990-04-20', 'Animales exóticos', '123456', 'a'),
+(8, 'Josué Adrián', 'García Juarez', 'josu', '1997-03-28', 'Oftalmología', '123456', '1');
 
 --
 -- Índices para tablas volcadas
@@ -188,31 +187,31 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `reportemedico`
 --
 ALTER TABLE `reportemedico`
-  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_reporteMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_veterinario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas

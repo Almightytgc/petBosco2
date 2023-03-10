@@ -1,6 +1,8 @@
 <?php
 include("../../templates/header.php");
 include("../../conexionBd.php"); 
+$url_base = "http://localhost/petBosco2/";
+
 
 
 session_start();
@@ -36,7 +38,7 @@ if($_POST) {
     $_SESSION['usuario'] = $registro['usuario'];
     $_SESSION['logueado'] = true;
 
-    header("Location: registroMascota.php");
+    header("Location: ../indexuser.php");
 }
 ?>
 

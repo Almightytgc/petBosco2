@@ -62,7 +62,7 @@ $url_base = "http://localhost/petBosco2/";
 
     <div class="card m-auto text-center">
         <div class="card-header">
-            <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar registro</a>
+            <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar reporte</a>
             <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexvet.php" role="button">Regresar al inicio</a>
 
         </div>

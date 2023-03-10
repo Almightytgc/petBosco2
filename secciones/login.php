@@ -45,7 +45,7 @@ if ($_POST) {
     <div class="card-header">
         <h3><b>Iniciar sesión</b></h3>
         <div class="alert alert-primary" role="alert">
-            <strong>Por favor ingrese sus datos</strong>
+            <strong>Bienvenido, por favor ingrese sus datos</strong>
         </div>  
     </div>
     <div class="card-body">
