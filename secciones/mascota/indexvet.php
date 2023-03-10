@@ -53,7 +53,7 @@ $mascotas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="card m-auto text-center">
         <div class="card-header">
-            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexuser.php" role="button">Regresar al inicio</a>
+            <a name="" id="" class="btn btn-warning" href="<?php echo $url_base; ?>secciones/indexvet.php" role="button">Regresar al inicio</a>
 
         </div>
         

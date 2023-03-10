@@ -15,30 +15,24 @@ if (isset($_GET['txtID'])) {
 
 
 
-//actualizar
-if($_POST) {
+if ($_POST) {
+  $txtID = (isset($_GET['txtID'])) ? $_GET['txtID'] : "";
+  // Obtenemos los valores existentes de la base de datos
+  $stmt = $conexion->prepare("SELECT fecha FROM cita WHERE id_cita = ?");
+  $stmt->execute([$txtID]);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  /* recolectamos los datos */
-  $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
-  /* validamos si existe un dato para nombredelpuesto, de lo contrario va a quedar en blanco */
-  $fechacita = (isset($_POST['fechacita']))?$_POST["fechacita"]:"";
+  // Combinamos los valores existentes con los valores proporcionados por el usuario
+  $fechacita = $_POST['fechacita'] ?? $row['fecha'];
 
-
-  
-  
-  /* preparamos la insercción o sentencia sql */
+  // Ejecutamos la sentencia SQL para actualizar la base de datos con los valores combinados
   $sentencia = $conexion->prepare("UPDATE cita SET fecha=:fechacita WHERE id_cita=:id_cita");
-  
-  //asigando los valores que vienen del método post (que vienen del formulario)
-  $sentencia->bindParam(":id_cita",$txtID);
-  $sentencia->bindParam(":fechacita",$fechacita);
-
+  $sentencia->bindParam(":id_cita", $txtID);
+  $sentencia->bindParam(":fechacita", $fechacita);
   $sentencia->execute();
-  
-  
-      header("Location: index.php");
-  }
 
+  header("Location: index.php");
+}
 ?>
 
 

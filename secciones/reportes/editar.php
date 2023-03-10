@@ -17,21 +17,19 @@ if (isset($_GET['txtID'])) {
 
 
 
-//actualizar
 if($_POST) {
 
   /* recolectamos los datos */
   $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
+  
   /* validamos si existe un dato para nombredelpuesto, de lo contrario va a quedar en blanco */
-  $chequeoGeneral = (isset($_POST['chequeogeneral']))?$_POST["chequeogeneral"]:"";
-  $medicamento = (isset($_POST['medicamento']))?$_POST["medicamento"]:"";
-  $tratamiento = (isset($_POST['tratamiento']))?$_POST["tratamiento"]:"";
-  $fechareporte = (isset($_POST['fechareporte']))?$_POST["fechareporte"]:"";
+  $chequeoGeneral = (!empty($_POST['chequeogeneral'])) ? $_POST['chequeogeneral'] : null;
+  $medicamento = (!empty($_POST['medicamento'])) ? $_POST['medicamento'] : null;
+  $tratamiento = (!empty($_POST['tratamiento'])) ? $_POST['tratamiento'] : null;
+  $fechareporte = (!empty($_POST['fechareporte'])) ? $_POST['fechareporte'] : null;
 
-  
-  
   /* preparamos la insercción o sentencia sql */
-  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=:chequeogeneral, medicamento=:medicamento, tratamiento=:tratamiento, fechareporte=:fechareporte WHERE id_reporteMedico=:id_reporteMedico");
+  $sentencia = $conexion->prepare("UPDATE reportemedico SET chequeogeneral=COALESCE(:chequeogeneral, chequeogeneral), medicamento=COALESCE(:medicamento, medicamento), tratamiento=COALESCE(:tratamiento, tratamiento), fechareporte=COALESCE(:fechareporte, fechareporte) WHERE id_reporteMedico=:id_reporteMedico");
   
   //asigando los valores que vienen del método post (que vienen del formulario)
   $sentencia->bindParam(":id_reporteMedico",$txtID);
@@ -42,10 +40,8 @@ if($_POST) {
 
   $sentencia->execute();
   
-  
-      header("Location: index.php");
-  }
-
+  header("Location: index.php");
+}
 ?>
 
 

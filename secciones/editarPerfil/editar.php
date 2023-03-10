@@ -17,35 +17,30 @@ if (isset($_GET['txtID'])) {
 
 
 
-//actualizar
-if($_POST) {
+if ($_POST) {
+  $txtID = (isset($_GET['txtID'])) ? $_GET['txtID'] : "";
+  // Obtenemos los valores existentes de la base de datos
+  $stmt = $conexion->prepare("SELECT num_telefonico, direccion, usuario, contraseña FROM cliente WHERE id_cliente = ?");
+  $stmt->execute([$txtID]);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  /* recolectamos los datos */
-  $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
-  /* validamos si existe un dato para nombredelpuesto, de lo contrario va a quedar en blanco */
-  $num_telefonico = (isset($_POST['num_telefonico']))?$_POST["num_telefonico"]:"";
-  $direccion = (isset($_POST['direccion']))?$_POST["direccion"]:"";
-  $usuario = (isset($_POST['usuario']))?$_POST["usuario"]:"";
-  $contrasenia = (isset($_POST['contrasenia']))?$_POST["contrasenia"]:"";
+  // Combinamos los valores existentes con los valores proporcionados por el usuario
+  $num_telefonico = (isset($_POST['num_telefonico']) && !empty($_POST['num_telefonico'])) ? $_POST['num_telefonico'] : $row['num_telefonico'];
+  $direccion = (isset($_POST['direccion']) && !empty($_POST['direccion'])) ? $_POST['direccion'] : $row['direccion'];
+  $usuario = (isset($_POST['usuario']) && !empty($_POST['usuario'])) ? $_POST['usuario'] : $row['usuario'];
+  $contrasenia = (isset($_POST['contrasenia']) && !empty($_POST['contrasenia'])) ? $_POST['contrasenia'] : $row['contraseña'];
 
-  
-  
-  /* preparamos la insercción o sentencia sql */
+  // Ejecutamos la sentencia SQL para actualizar la base de datos con los valores combinados
   $sentencia = $conexion->prepare("UPDATE cliente SET num_telefonico=:num_telefonico, direccion=:direccion, usuario=:usuario, contraseña=:contrasenia WHERE id_cliente=:id_cliente");
-  
-  //asigando los valores que vienen del método post (que vienen del formulario)
-  $sentencia->bindParam(":id_cliente",$txtID);
-  $sentencia->bindParam(":num_telefonico",$num_telefonico);
-  $sentencia->bindParam(":direccion",$direccion);
-  $sentencia->bindParam(":usuario",$usuario);
-  $sentencia->bindParam(":contrasenia",$contrasenia);
-
+  $sentencia->bindParam(":id_cliente", $txtID);
+  $sentencia->bindParam(":num_telefonico", $num_telefonico);
+  $sentencia->bindParam(":direccion", $direccion);
+  $sentencia->bindParam(":usuario", $usuario);
+  $sentencia->bindParam(":contrasenia", $contrasenia);
   $sentencia->execute();
-  
-  
-      header("Location: index.php");
-  }
 
+  header("Location: index.php");
+}
 ?>
 
 
